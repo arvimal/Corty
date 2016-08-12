@@ -33,13 +33,14 @@ class Daisho(object):
 
     def __init__(self):
         if os.path.exists(TODO_LIST) and os.path.exists(CONFIG):
+            print("Welcome to Daisho.")
             self.daisho_prompt()
         else:
             print("\nWelcome to Daisho.")
-            print("\nInitial setup...")
-            print("This is a one-time task.\n")
-            print("Creating Daisho's config directory.")
-            os.mkdir(DAISHO_HOME)
+            print("\n- Initial setup...")
+            print("- This is a one-time task.\n")
+            print("- Creating Daisho's config directory.")
+            os.makedirs(DAISHO_HOME)
             print("Creating configuration files.\n")
             daisho_config_file = ConfigParser.ConfigParser()
 
@@ -61,8 +62,11 @@ class Daisho(object):
                 # We call the __doc__ magic method till it's implemented.
                 print(self.search_tasks.__doc__)
 
+            elif value[0] == "help":
+                self.daisho_help()
+
             elif value[0] == "quit":
-                sys.exit("\nExisting pytick!\n")
+                sys.exit("\nExisting daisho!\n")
 
             else:
                 self.daisho_help()
@@ -87,6 +91,13 @@ class Daisho(object):
     def daisho_help(self):
         """Usage:"""
 
+        print ""
+        print "Usage : "
+        print " 1) add <to-do>          - To add a new to-do."
+        print " 2) search <key-word>    - To search a keyword."
+        print " 3) list <day>           - To list to-dos for the day."
+        print " 4) help                 - Prints this help message. "
+        print " 5) quit                 - Quits Daisho. "
+        pass
 
 my_daisho = Daisho()
-my_daisho.daisho_prompt()
