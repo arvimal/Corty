@@ -1,0 +1,27 @@
+TO_DO for the Terminal interface:
+
+Basic:
+
+1. Store info in a txt(?)
+
+
+
+TODO for the GUI interface:
+  ☐ Will need JavaScript, HTML, and CSS. 
+  ☐ Refer Codecademy and Udacity for tutorials.
+  ☐ https://www.youtube.com/watch?v=j8n03Cu1Q_c
+  ☐ 
+  NOTE:
+☐ 1. Build an interface using Electron - http://electron.atom.io/
+☐ 2. The interface will have a Pomodoro App which will work on your TODO jobs.
+☐ 2. Borrow ideas from Wunderlist
+☐ 3. Integrate with Wunderlist using it's APIs
+   ☐ https://developer.wunderlist.com/documentation
+   ☐ https://developer.wunderlist.com/documentation/endpoints/task
+   ☐ https://www.wunderlist.com/blog/building-with-wunderlist-introducing-our-public-api/
+   ☐ https://developer.wunderlist.com/
+☐ 4. Include a Pomodoro Timer in the GUI interface, which can take in Wunderlist jobs as well
+☐ 5. 
+
+1. Create a GUI pop-up using the Fedora message bus.
+2. A scanner which periodically scans the todo list and throws a popup.

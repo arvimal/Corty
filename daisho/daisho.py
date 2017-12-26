@@ -18,37 +18,46 @@
 
 import os
 import sys
-import yaml
 import ConfigParser
-import logging
+from prompt_toolkit import prompt
+from prompt_toolkit.history import FileHistory
+from prompt_toolkit.auto_suggest import AutoSuggestFromHistory
+from prompt_toolkit.contrib.completers import WordCompleter
 
-
-DAISHO_HOME = "~/.config/daisho/"
-CONFIG = "~/.config/daisho/daisho.conf"
-TODO_LIST = "~/.config/daisho/to-do.yaml"
+HOME = os.getenv('HOME')
+DAISHO_HOME = HOME + "/.config/daisho/"
+CONFIG = DAISHO_HOME + "daisho.conf"
+TODO_LIST = DAISHO_HOME + "to-do.yaml"
+HISTORY = DAISHO_HOME + "history.txt"
 
 
 class Daisho(object):
-    """The main class"""
+    """Daisho's main class"""
 
     def __init__(self):
-        if os.path.exists(TODO_LIST) and os.path.exists(CONFIG):
+        if os.path.exists(DAISHO_HOME) and os.path.exists(CONFIG) and os.path.exists(TODO_LIST):
             print("Welcome to Daisho.")
             self.daisho_prompt()
         else:
-            print("\nWelcome to Daisho.")
-            print("\n- Initial setup...")
-            print("- This is a one-time task.\n")
+            print("\n- Daisho - Initial setup, a one-time task!")
             print("- Creating Daisho's config directory.")
             os.makedirs(DAISHO_HOME)
             print("Creating configuration files.\n")
-            daisho_config_file = ConfigParser.ConfigParser()
+            daisho_config_file = ConfigParser.ConfigParser(CONFIG)
+            self.daisho_prompt()
 
     def daisho_prompt(self):
         """The heart of Daisho"""
+        keyword_completer = WordCompleter(
+            ['add', 'list', 'search', 'help', 'quit'])
+
         while True:
-            prompt = raw_input("daisho ->> ")
-            value = prompt.split(" ")
+            daisho_prompt = prompt("daisho ->>",
+                                   history=FileHistory(HISTORY),
+                                   auto_suggest=AutoSuggestFromHistory(),
+                                   completer=keyword_completer)
+
+            value = daisho_prompt.split(" ")
             if len(value) == 1 and value[0] == "add":
                 print("`add` takes a to-do, try again!")
 
@@ -77,6 +86,7 @@ class Daisho(object):
 
         Not yet implemented, come again later!
         """
+
         pass
 
     def add_tasks(self, *args):
@@ -90,14 +100,14 @@ class Daisho(object):
 
     def daisho_help(self):
         """Usage:"""
-
-        print ""
-        print "Usage : "
-        print " 1) add <to-do>          - To add a new to-do."
-        print " 2) search <key-word>    - To search a keyword."
-        print " 3) list <day>           - To list to-dos for the day."
-        print " 4) help                 - Prints this help message. "
-        print " 5) quit                 - Quits Daisho. "
+        print("")
+        print("Usage : \n")
+        print(" 1) add <to-do>          - To add a new to-do.")
+        print(" 2) search <key-word>    - To search for a keyword.")
+        print(" 3) list <day>           - To list to-dos for the day.")
+        print(" 4) help                 - Prints this help message. ")
+        print(" 5) quit                 - Quits Daisho. ")
         pass
 
 my_daisho = Daisho()
+my_daisho()
