@@ -18,6 +18,7 @@
 
 import os
 import sys
+import pathlib
 import configparser
 from prompt_toolkit import prompt
 from prompt_toolkit.history import FileHistory
@@ -43,20 +44,20 @@ class Daisho(object):
             print("\nWelcome to Daisho.\n")
             print("Initial setup:")
             print("\tCreating Daisho's configurations")
-            os.makedirs(DAISHO_HOME)
-            self.create_config(CONFIG)
+            pathlib.Path.mkdir(DAISHO_HOME)
+            pathlib.Path.touch(CONFIG)
+            pathlib.Path.touch(CONFIG, exist_ok=True)
+            pathlib.Path.touch(HISTORY, exist_ok=True)
+            conf_parser = configparser.ConfigParser()
+            conf_parser.read(CONFIG)
+            conf_parser.add_section("Global")
+            conf_parser.set("Global", "DAISHO_HOME", DAISHO_HOME)
+            conf_parser.set("Global", "CONFIG", CONFIG)
+            conf_parser.set("Global", "TODO_LIST", TODO_LIST)
+            conf_parser.set("Global", "HISTORY", HISTORY)
+            print("Done\n")
             self.daisho_prompt()
 
-    def create_config(self, CONFIG):
-        with open(CONFIG, "w") as daisho_config:
-            daisho_config.write("# Daisho - Configurations\n")
-        conf_parser = configparser.ConfigParser()
-        conf_parser.read(CONFIG)
-        conf_parser.add_section("Global")
-        conf_parser.set("Global", "DAISHO_HOME", DAISHO_HOME)
-        conf_parser.set("Global", "CONFIG", CONFIG)
-        conf_parser.set("Global", "TODO_LIST", TODO_LIST)
-        conf_parser.set("Global", "HISTORY", HISTORY)
 
     def daisho_prompt(self):
         """The heart of Daisho"""
