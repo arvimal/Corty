@@ -2,15 +2,14 @@
 
 ### Introduction
 
-[Daisho](https://en.wikipedia.org/wiki/Daish%C5%8D) in Japanese literally means `big-little`.
+[Daisho](https://en.wikipedia.org/wiki/Daish%C5%8D), in Japanese, means `big-little`.
 
+This application aims to be small and simple, while aiming to solve big problems.
 ### How it works?
 
-As of now, Daisho will have to be started in a terminal where it will wait for tasks to be input.
+Daisho, has to be started from the terminal, where it will wait for the user's inputs, and act accordingly.
 
-A normal input will have to have the keyword `add` prior stating the to-do.
-
-The to-do is saved in a YAML formatted file in Daisho's configuration path, ie.. at ~/.config/daisho/to-do.yaml
+A help section is shown to the user, prior the application allows the user to interact with it. 
 
 ### Other points of interest
 
