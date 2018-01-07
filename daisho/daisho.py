@@ -36,26 +36,30 @@ class Daisho(object):
     """Daisho's main class"""
     
     def __init__(self):
-        if all([CONFIG, TODO_LIST]):
+        if all([pathlib.Path(CONFIG).exists(),
+                pathlib.Path(TODO_LIST).exists()]):
             print("\nWelcome to Daisho.\n")
             self.daisho_prompt()
 
+       # elif not (pathlib.Path.exists(CONFIG) or (pathlib.Path.exists(TODO_LIST))):
         else:
             print("\nWelcome to Daisho.\n")
             print("Initial setup:")
             print("\tCreating Daisho's configurations")
-            pathlib.Path.mkdir(DAISHO_HOME)
-            pathlib.Path.touch(CONFIG)
-            pathlib.Path.touch(CONFIG, exist_ok=True)
-            pathlib.Path.touch(HISTORY, exist_ok=True)
+            pathlib.Path(DAISHO_HOME).mkdir()
+            pathlib.Path(CONFIG).touch(exist_ok=True)
+            pathlib.Path(TODO_LIST).touch(exist_ok=True)
+            pathlib.Path(HISTORY).touch(exist_ok=True)
             conf_parser = configparser.ConfigParser()
-            conf_parser.read(CONFIG)
+            #conf_parser.read(CONFIG)
             conf_parser.add_section("Global")
             conf_parser.set("Global", "DAISHO_HOME", DAISHO_HOME)
             conf_parser.set("Global", "CONFIG", CONFIG)
             conf_parser.set("Global", "TODO_LIST", TODO_LIST)
             conf_parser.set("Global", "HISTORY", HISTORY)
-            print("Done\n")
+            with open(CONFIG, "w") as config_file:
+                conf_parser.write(config_file)
+            print("\tDone\n")
             self.daisho_prompt()
 
 
@@ -65,7 +69,7 @@ class Daisho(object):
         keyword_completer = WordCompleter(cmd_list)
 
         while True:
-            daisho_prompt = prompt("daisho ->>",
+            daisho_prompt = prompt("daisho ->> ",
                                    history=FileHistory(HISTORY),
                                    auto_suggest=AutoSuggestFromHistory(),
                                    completer=keyword_completer)
@@ -122,5 +126,6 @@ class Daisho(object):
         print(" 5) quit                 - Quits Daisho. ")
         pass
 
-my_daisho = Daisho()
-my_daisho()
+if __name__ == "__main__":
+    my_daisho = Daisho()
+    my_daisho()
