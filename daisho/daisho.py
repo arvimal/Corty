@@ -36,22 +36,24 @@ class Daisho(object):
     """Daisho's main class"""
     
     def __init__(self):
+        # Check existence of CONFIG and TODO_LIST
         if all([pathlib.Path(CONFIG).exists(),
                 pathlib.Path(TODO_LIST).exists()]):
-            print("\nWelcome to Daisho.\n")
+            print("\nWelcome to Daisho")
+            self.daisho_help()
             self.daisho_prompt()
-
-       # elif not (pathlib.Path.exists(CONFIG) or (pathlib.Path.exists(TODO_LIST))):
         else:
             print("\nWelcome to Daisho.\n")
             print("Initial setup:")
             print("\tCreating Daisho's configurations")
+
+            # Create HOME, CONFIG, TODO_LIST, and HISTORY
             pathlib.Path(DAISHO_HOME).mkdir()
             pathlib.Path(CONFIG).touch(exist_ok=True)
             pathlib.Path(TODO_LIST).touch(exist_ok=True)
             pathlib.Path(HISTORY).touch(exist_ok=True)
+            # Write Daisho's configuration file
             conf_parser = configparser.ConfigParser()
-            #conf_parser.read(CONFIG)
             conf_parser.add_section("Global")
             conf_parser.set("Global", "DAISHO_HOME", DAISHO_HOME)
             conf_parser.set("Global", "CONFIG", CONFIG)
@@ -60,8 +62,8 @@ class Daisho(object):
             with open(CONFIG, "w") as config_file:
                 conf_parser.write(config_file)
             print("\tDone\n")
+            self.daisho_help()
             self.daisho_prompt()
-
 
     def daisho_prompt(self):
         """The heart of Daisho"""
@@ -117,13 +119,12 @@ class Daisho(object):
 
     def daisho_help(self):
         """Usage:"""
-        print("")
-        print("Usage : \n")
-        print(" 1) add <to-do>          - To add a new to-do.")
-        print(" 2) search <key-word>    - To search for a keyword.")
-        print(" 3) list <day>           - To list to-dos for the day.")
-        print(" 4) help                 - Prints this help message. ")
-        print(" 5) quit                 - Quits Daisho. ")
+        print("\nUsage:")
+        print(" 1. add <to-do>          - To add a new to-do.")
+        print(" 2. search <key-word>    - To search for a keyword.")
+        print(" 3. list <day>           - To list to-dos for the day.")
+        print(" 4. help                 - Prints this help message. ")
+        print(" 5. quit                 - Quits Daisho. \n")
         pass
 
 if __name__ == "__main__":
