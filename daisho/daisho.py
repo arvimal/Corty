@@ -65,8 +65,23 @@ class Daisho(object):
             self.daisho_help()
             self.daisho_prompt()
 
+    def daisho_help(self):
+        """
+        Daisho's Usage
+        """
+        print("\nUsage:")
+        print(" 1. add <to-do>          - Add a new to-do.")
+        print(" 2. search <key-word>    - Search for a keyword.")
+        print(" 3. list <day>           - List to-dos for the day.")
+        print(" 4. help                 - Prints this help message. ")
+        print(" 5. quit                 - Quits Daisho. \n")
+        pass
+
     def daisho_prompt(self):
-        """The heart of Daisho"""
+        """
+        Daisho's prompt.
+        Process user-input
+        """
         cmd_list = ['add', 'list', 'search', 'help', 'quit']
         keyword_completer = WordCompleter(cmd_list)
 
@@ -75,27 +90,20 @@ class Daisho(object):
                                    history=FileHistory(HISTORY),
                                    auto_suggest=AutoSuggestFromHistory(),
                                    completer=keyword_completer)
-
             value = daisho_prompt.split(" ")
             if len(value) == 1 and value[0] == "add":
                 print("`add` takes a to-do, try again!")
-
             elif len(value) >= 1 and value[0] == "add":
                 self.add_tasks()
-
             if len(value) == 1 and value[0] == "list":
                 self.list_tasks()
-
             elif value[0] == "search":
                 # We call the __doc__ magic method till it's implemented.
                 print(self.search_tasks.__doc__)
-
             elif value[0] == "help":
                 self.daisho_help()
-
             elif value[0] == "quit":
-                sys.exit("\nExisting daisho!\n")
-
+                sys.exit("\nExiting daisho!\n")
             else:
                 self.daisho_help()
 
@@ -117,15 +125,6 @@ class Daisho(object):
         print("Not yet implemented, come again later!")
         pass
 
-    def daisho_help(self):
-        """Usage:"""
-        print("\nUsage:")
-        print(" 1. add <to-do>          - To add a new to-do.")
-        print(" 2. search <key-word>    - To search for a keyword.")
-        print(" 3. list <day>           - To list to-dos for the day.")
-        print(" 4. help                 - Prints this help message. ")
-        print(" 5. quit                 - Quits Daisho. \n")
-        pass
 
 if __name__ == "__main__":
     my_daisho = Daisho()

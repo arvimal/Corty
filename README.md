@@ -7,7 +7,7 @@
 This application aims to be small and simple, while aiming to solve big problems.
 ### How it works?
 
-Daisho, has to be started from the terminal, where it will wait for the user's inputs, and act accordingly.
+Daisho has to be started from the terminal, where it will wait for the user's inputs and act accordingly.
 
 A help section is shown to the user, prior the application allows the user to interact with it. 
 
