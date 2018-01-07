@@ -18,7 +18,7 @@
 
 import os
 import sys
-import ConfigParser
+import configparser
 from prompt_toolkit import prompt
 from prompt_toolkit.history import FileHistory
 from prompt_toolkit.auto_suggest import AutoSuggestFromHistory
@@ -33,23 +33,35 @@ HISTORY = DAISHO_HOME + "history.txt"
 
 class Daisho(object):
     """Daisho's main class"""
-
+    
     def __init__(self):
-        if os.path.exists(DAISHO_HOME) and os.path.exists(CONFIG) and os.path.exists(TODO_LIST):
-            print("Welcome to Daisho.")
+        if all([CONFIG, TODO_LIST]):
+            print("\nWelcome to Daisho.\n")
             self.daisho_prompt()
+
         else:
-            print("\n- Daisho - Initial setup, a one-time task!")
-            print("- Creating Daisho's config directory.")
+            print("\nWelcome to Daisho.\n")
+            print("Initial setup:")
+            print("\tCreating Daisho's configurations")
             os.makedirs(DAISHO_HOME)
-            print("Creating configuration files.\n")
-            daisho_config_file = ConfigParser.ConfigParser(CONFIG)
+            self.create_config(CONFIG)
             self.daisho_prompt()
+
+    def create_config(self, CONFIG):
+        with open(CONFIG, "w") as daisho_config:
+            daisho_config.write("# Daisho - Configurations\n")
+        conf_parser = configparser.ConfigParser()
+        conf_parser.read(CONFIG)
+        conf_parser.add_section("Global")
+        conf_parser.set("Global", "DAISHO_HOME", DAISHO_HOME)
+        conf_parser.set("Global", "CONFIG", CONFIG)
+        conf_parser.set("Global", "TODO_LIST", TODO_LIST)
+        conf_parser.set("Global", "HISTORY", HISTORY)
 
     def daisho_prompt(self):
         """The heart of Daisho"""
-        keyword_completer = WordCompleter(
-            ['add', 'list', 'search', 'help', 'quit'])
+        cmd_list = ['add', 'list', 'search', 'help', 'quit']
+        keyword_completer = WordCompleter(cmd_list)
 
         while True:
             daisho_prompt = prompt("daisho ->>",
