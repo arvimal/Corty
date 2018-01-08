@@ -105,24 +105,27 @@ class Daisho(object):
             else:
                 self.daisho_help()
 
-    def list_tasks(self):
-        """Lists tasks.
-        Takes arguments such as `today`, `tomorrow`, weekday etc..
-
-        Not yet implemented, come again later!
+    def add_tasks(self, *args):
         """
-
+        Add the tasks to TODO_LIST
+        """
+        print(self.add_tasks.__doc__)
         pass
 
-    def add_tasks(self, *args):
-        # Add tasks as yaml
+    def list_tasks(self):
+        """
+        List tasks based on dates and fuzzy inputs,
+        Ex: today, tomorrow, yesterday, date etc. 
+        """
+        print(self.list_tasks.__doc__)
         pass
 
     def search_tasks(self):
-        """Search tasks based on keywords"""
-        print("Not yet implemented, come again later!")
+        """
+        Search tasks based on keywords
+        """
+        print(self.search_tasks.__doc__)
         pass
-
 
 if __name__ == "__main__":
     my_daisho = Daisho()
