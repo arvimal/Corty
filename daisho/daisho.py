@@ -91,19 +91,17 @@ class Daisho(object):
                                    auto_suggest=AutoSuggestFromHistory(),
                                    completer=keyword_completer)
             value = daisho_prompt.split(" ")
-            if len(value) == 1 and value[0] == "add":
-                print("`add` takes a to-do, try again!")
-            elif len(value) >= 1 and value[0] == "add":
-                self.add_tasks()
-            if len(value) == 1 and value[0] == "list":
-                self.list_tasks()
-            elif value[0] == "search":
-                # We call the __doc__ magic method till it's implemented.
-                print(self.search_tasks.__doc__)
-            elif value[0] == "help":
+            # Split based on inputs
+            if value[0] == 'add':
+                self.add_tasks(value)
+            elif value[0] == 'list':
+                self.list_tasks(value)
+            elif value[0] == 'search':
+                self.search_tasks(value)
+            elif value[0] == 'help':
                 self.daisho_help()
-            elif value[0] == "quit":
-                sys.exit("\nExiting daisho!\n")
+            elif value[0] == 'quit':
+               sys.exit("\nExiting Daisho.\n")
             else:
                 self.daisho_help()
 
