@@ -29,7 +29,6 @@ from prompt_toolkit.contrib.completers import WordCompleter
 HOME = os.getenv('HOME')
 DAISHO_HOME = HOME + "/.config/daisho/"
 CONFIG = DAISHO_HOME + "daisho.conf"
-TODO_LIST = DAISHO_HOME + "to-do.yaml"
 HISTORY = DAISHO_HOME + "history.txt"
 LOG_FILE = DAISHO_HOME + "daisho.log"
 
@@ -38,12 +37,11 @@ class Daisho(object):
     """Daisho's main class"""
 
     def __init__(self):
-        # Check existence of CONFIG and TODO_LIST
-        if all([pathlib.Path(CONFIG).exists(),
-                pathlib.Path(TODO_LIST).exists()]):
+        # Check existence of CONFIG
+        if all([pathlib.Path(CONFIG).exists()]):
             logging.basicConfig(filename=LOG_FILE, level=logging.INFO)
             logging.info("#### Daisho starting up ####")
-            logging.info("{} and {} exists".format(CONFIG, TODO_LIST))
+            logging.info("{} exists".format(CONFIG))
             print("\nWelcome to Daisho")
             self.daisho_help()
             self.daisho_prompt()
@@ -54,10 +52,9 @@ class Daisho(object):
             print("Initial setup:")
             print("\tCreating Daisho's configurations")
 
-            # Create HOME, CONFIG, TODO_LIST, HISTORY, and LOG_FILE
+            # Create HOME, CONFIG, HISTORY, and LOG_FILE
             pathlib.Path(DAISHO_HOME).mkdir()
             pathlib.Path(CONFIG).touch(exist_ok=True)
-            pathlib.Path(TODO_LIST).touch(exist_ok=True)
             pathlib.Path(HISTORY).touch(exist_ok=True)
             pathlib.Path(LOG_FILE).touch(exist_ok=True)
             # Write Daisho's configuration file
@@ -65,12 +62,13 @@ class Daisho(object):
             conf_parser.add_section("Global")
             conf_parser.set("Global", "DAISHO_HOME", DAISHO_HOME)
             conf_parser.set("Global", "CONFIG", CONFIG)
-            conf_parser.set("Global", "TODO_LIST", TODO_LIST)
             conf_parser.set("Global", "HISTORY", HISTORY)
             conf_parser.set("Global", "LOG_FILE", LOG_FILE)
             with open(CONFIG, "w") as config_file:
                 conf_parser.write(config_file)
             print("\tDone\n")
+
+            # Configure logging from here
             logging.basicConfig(filename=LOG_FILE, level=logging.INFO)
             logging.info("Daisho configurations freshly generated.")
             logging.info("#### Daisho starting up ####")
@@ -121,7 +119,7 @@ class Daisho(object):
 
     def add_tasks(self, *args):
         """
-        Add the tasks to TODO_LIST
+        Adds your tasks
         """
         print(self.add_tasks.__doc__)
         logging.info("Calling add_tasks()")
