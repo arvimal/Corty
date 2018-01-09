@@ -20,6 +20,7 @@ import os
 import sys
 import pathlib
 import configparser
+import logging
 from prompt_toolkit import prompt
 from prompt_toolkit.history import FileHistory
 from prompt_toolkit.auto_suggest import AutoSuggestFromHistory
@@ -30,28 +31,34 @@ DAISHO_HOME = HOME + "/.config/daisho/"
 CONFIG = DAISHO_HOME + "daisho.conf"
 TODO_LIST = DAISHO_HOME + "to-do.yaml"
 HISTORY = DAISHO_HOME + "history.txt"
+LOG_FILE = DAISHO_HOME + "daisho.log"
 
 
 class Daisho(object):
     """Daisho's main class"""
-    
+
     def __init__(self):
         # Check existence of CONFIG and TODO_LIST
         if all([pathlib.Path(CONFIG).exists(),
                 pathlib.Path(TODO_LIST).exists()]):
+            logging.basicConfig(filename=LOG_FILE, level=logging.INFO)
+            logging.info("{} and {} exists, starting Daisho".format(CONFIG, TODO_LIST))
             print("\nWelcome to Daisho")
             self.daisho_help()
             self.daisho_prompt()
+            logging.info("Started Daisho prompt.")
+
         else:
             print("\nWelcome to Daisho.\n")
             print("Initial setup:")
             print("\tCreating Daisho's configurations")
 
-            # Create HOME, CONFIG, TODO_LIST, and HISTORY
+            # Create HOME, CONFIG, TODO_LIST, HISTORY, and LOG_FILE
             pathlib.Path(DAISHO_HOME).mkdir()
             pathlib.Path(CONFIG).touch(exist_ok=True)
             pathlib.Path(TODO_LIST).touch(exist_ok=True)
             pathlib.Path(HISTORY).touch(exist_ok=True)
+            pathlib.Path(LOG_FILE).touch(exist_ok=True)
             # Write Daisho's configuration file
             conf_parser = configparser.ConfigParser()
             conf_parser.add_section("Global")
@@ -59,11 +66,15 @@ class Daisho(object):
             conf_parser.set("Global", "CONFIG", CONFIG)
             conf_parser.set("Global", "TODO_LIST", TODO_LIST)
             conf_parser.set("Global", "HISTORY", HISTORY)
+            conf_parser.set("Global", "LOG_FILE", LOG_FILE)
             with open(CONFIG, "w") as config_file:
                 conf_parser.write(config_file)
             print("\tDone\n")
+            logging.basicConfig(filename=LOG_FILE, level=logging.INFO)
+            logging.info("Configurations freshly generated, starting Daisho.")
             self.daisho_help()
             self.daisho_prompt()
+            logging.info("Started Daisho prompt.")
 
     def daisho_help(self):
         """
@@ -90,14 +101,15 @@ class Daisho(object):
                                    history=FileHistory(HISTORY),
                                    auto_suggest=AutoSuggestFromHistory(),
                                    completer=keyword_completer)
+            # Split the input to a list
             value = daisho_prompt.split(" ")
-            # Split based on inputs
+            # Branch out based on inputs
             if value[0] == 'add':
-                self.add_tasks(value)
+                self.add_tasks(self, value)
             elif value[0] == 'list':
-                self.list_tasks(value)
+                self.list_tasks(self, value)
             elif value[0] == 'search':
-                self.search_tasks(value)
+                self.search_tasks(self, value)
             elif value[0] == 'help':
                 self.daisho_help()
             elif value[0] == 'quit':
@@ -110,21 +122,24 @@ class Daisho(object):
         Add the tasks to TODO_LIST
         """
         print(self.add_tasks.__doc__)
+        logging.info("Calling add_tasks()")
         pass
 
-    def list_tasks(self):
+    def list_tasks(self, *args):
         """
         List tasks based on dates and fuzzy inputs,
-        Ex: today, tomorrow, yesterday, date etc. 
+        Ex: today, tomorrow, yesterday, date etc.
         """
         print(self.list_tasks.__doc__)
+        logging.info("Calling list_tasks()")
         pass
 
-    def search_tasks(self):
+    def search_tasks(self, *args):
         """
         Search tasks based on keywords
         """
         print(self.search_tasks.__doc__)
+        logging.info("Calling search_tasks()")
         pass
 
 if __name__ == "__main__":
