@@ -42,7 +42,8 @@ class Daisho(object):
         if all([pathlib.Path(CONFIG).exists(),
                 pathlib.Path(TODO_LIST).exists()]):
             logging.basicConfig(filename=LOG_FILE, level=logging.INFO)
-            logging.info("{} and {} exists, starting Daisho".format(CONFIG, TODO_LIST))
+            logging.info("#### Daisho starting up ####")
+            logging.info("{} and {} exists".format(CONFIG, TODO_LIST))
             print("\nWelcome to Daisho")
             self.daisho_help()
             self.daisho_prompt()
@@ -71,7 +72,8 @@ class Daisho(object):
                 conf_parser.write(config_file)
             print("\tDone\n")
             logging.basicConfig(filename=LOG_FILE, level=logging.INFO)
-            logging.info("Configurations freshly generated, starting Daisho.")
+            logging.info("Daisho configurations freshly generated.")
+            logging.info("#### Daisho starting up ####")
             self.daisho_help()
             self.daisho_prompt()
             logging.info("Started Daisho prompt.")
