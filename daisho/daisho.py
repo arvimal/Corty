@@ -70,7 +70,7 @@ class Daisho(object):
 
             # Configure logging from here
             logging.basicConfig(filename=LOG_FILE, level=logging.INFO)
-            logging.info("Daisho configurations freshly generated.")
+            logging.info("Generating configuration files.")
             logging.info("#### Daisho starting up ####")
             self.daisho_help()
             self.daisho_prompt()
