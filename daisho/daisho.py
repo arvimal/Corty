@@ -25,6 +25,7 @@ from prompt_toolkit import prompt
 from prompt_toolkit.history import FileHistory
 from prompt_toolkit.auto_suggest import AutoSuggestFromHistory
 from prompt_toolkit.contrib.completers import WordCompleter
+import daisho_db
 
 HOME = os.getenv('HOME')
 DAISHO_HOME = HOME + "/.config/daisho/"
@@ -113,7 +114,7 @@ class Daisho(object):
             elif value[0] == 'help':
                 self.daisho_help()
             elif value[0] == 'quit':
-               sys.exit("\nExiting Daisho.\n")
+                sys.exit("\nExiting Daisho.\n")
             else:
                 self.daisho_help()
 
@@ -121,11 +122,12 @@ class Daisho(object):
         """
         Adds your tasks
         """
-        print(self.add_tasks.__doc__)
+        # print(self.add_tasks.__doc__)
         logging.info("Calling add_tasks()")
+        daisho_db.add_data(*args)
         pass
 
-    def list_tasks(self, *args):
+    def list_tasks(self, data):
         """
         List tasks based on dates and fuzzy inputs,
         Ex: today, tomorrow, yesterday, date etc.
@@ -142,6 +144,8 @@ class Daisho(object):
         logging.info("Calling search_tasks()")
         pass
 
+
 if __name__ == "__main__":
     my_daisho = Daisho()
-    my_daisho()
+    # my_daisho()
+    my_daisho.add_tasks("test")
