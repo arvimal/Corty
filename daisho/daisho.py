@@ -44,6 +44,8 @@ class Daisho(object):
             logging.info("#### Daisho starting up ####")
             logging.info("{} exists".format(CONFIG))
             print("\nWelcome to Daisho")
+            # Check if we are able to connect to MongoDB.
+            daisho_db.mongo_conn()
             self.daisho_help()
             self.daisho_prompt()
             logging.info("Started Daisho prompt.")
@@ -67,12 +69,14 @@ class Daisho(object):
             conf_parser.set("Global", "LOG_FILE", LOG_FILE)
             with open(CONFIG, "w") as config_file:
                 conf_parser.write(config_file)
-            print("\tDone\n")
+            print("\tDone")
 
             # Configure logging from here
             logging.basicConfig(filename=LOG_FILE, level=logging.INFO)
             logging.info("Generating configuration files.")
             logging.info("#### Daisho starting up ####")
+            # Check if we are able to connect to MongoDB.
+            daisho_db.mongo_conn()
             self.daisho_help()
             self.daisho_prompt()
             logging.info("Started Daisho prompt.")
@@ -92,9 +96,14 @@ class Daisho(object):
     def daisho_prompt(self):
         """
         Daisho's prompt.
-        Process user-input
         """
-        cmd_list = ['add', 'list', 'search', 'help', 'quit']
+        cmd_list = [
+            'add',
+            'list',
+            'search',
+            'help',
+            'quit'
+        ]
         keyword_completer = WordCompleter(cmd_list)
 
         while True:
@@ -106,9 +115,9 @@ class Daisho(object):
             value = daisho_prompt.split(" ")
             # Branch out based on inputs
             if value[0] == 'add':
-                self.add_tasks(self, value)
+                self.add_tasks()
             elif value[0] == 'list':
-                self.list_tasks(self, value)
+                self.list_tasks(value)
             elif value[0] == 'search':
                 self.search_tasks(self, value)
             elif value[0] == 'help':
@@ -118,16 +127,25 @@ class Daisho(object):
             else:
                 self.daisho_help()
 
-    def add_tasks(self, *args):
+    def add_tasks(self):
         """
         Adds your tasks
         """
-        # print(self.add_tasks.__doc__)
         logging.info("Calling add_tasks()")
-        daisho_db.add_data(*args)
-        pass
+        fields = {
+            "Subject": "",
+            "Date": "",
+            "Tags": "",
+            "Priority": ""
+        }
+        for key in fields:
+            fields[key] = input("{0:10} : ".format(key))
+        print(fields)  # Added for self info
+        print()
+        # Process the dict `fields` before sending to
+        # mongodb via daisho_db.add_data()
 
-    def list_tasks(self, data):
+    def list_tasks(self, value="today"):
         """
         List tasks based on dates and fuzzy inputs,
         Ex: today, tomorrow, yesterday, date etc.
@@ -147,5 +165,4 @@ class Daisho(object):
 
 if __name__ == "__main__":
     my_daisho = Daisho()
-    # my_daisho()
-    my_daisho.add_tasks("test")
+    my_daisho()
