@@ -18,14 +18,17 @@
 
 import os
 import sys
-import pathlib
-import configparser
 import logging
+import daisho_db
 from prompt_toolkit import prompt
 from prompt_toolkit.history import FileHistory
 from prompt_toolkit.auto_suggest import AutoSuggestFromHistory
 from prompt_toolkit.contrib.completers import WordCompleter
-import daisho_db
+try:
+    import pathlib, configparser
+except ImportError:
+    print("Daisho requires Python v3, exiting now!")
+    sys.exit()
 
 HOME = os.getenv('HOME')
 DAISHO_HOME = HOME + "/.config/daisho/"
@@ -39,6 +42,7 @@ class Daisho(object):
 
     def __init__(self):
         # Check existence of CONFIG
+        # Move logging to a separate file
         if all([pathlib.Path(CONFIG).exists()]):
             logging.basicConfig(filename=LOG_FILE, level=logging.INFO)
             logging.info("#### Daisho starting up ####")
@@ -144,6 +148,14 @@ class Daisho(object):
         print()
         # Process the dict `fields` before sending to
         # mongodb via daisho_db.add_data()
+
+        fields_new = {
+            "Subject": {
+                "Date": "",
+                "Tags": "",
+                "Priority": ""
+            }
+        }
 
     def list_tasks(self, value="today"):
         """
