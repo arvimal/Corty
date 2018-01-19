@@ -16,19 +16,22 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
-import os
 import sys
+if sys.version[0] != "3":
+    print("\nDaisho requires Python v3.")
+    print("Install Python v3, or use the v3 binary to run `daisho.py` if already installed.")
+    print("\n\t# python3.6 daisho.py\n")
+    print("Exiting Daisho!\n")
+    sys.exit(1)
+import os
 import logging
+import pathlib
+import configparser
 import daisho_db
 from prompt_toolkit import prompt
 from prompt_toolkit.history import FileHistory
 from prompt_toolkit.auto_suggest import AutoSuggestFromHistory
 from prompt_toolkit.contrib.completers import WordCompleter
-try:
-    import pathlib, configparser
-except ImportError:
-    print("Daisho requires Python v3, exiting now!")
-    sys.exit()
 
 HOME = os.getenv('HOME')
 DAISHO_HOME = HOME + "/.config/daisho/"
@@ -42,12 +45,12 @@ class Daisho(object):
 
     def __init__(self):
         # Check existence of CONFIG
-        # Move logging to a separate file
+        # Move logging to its own file
         if all([pathlib.Path(CONFIG).exists()]):
             logging.basicConfig(filename=LOG_FILE, level=logging.INFO)
             logging.info("#### Daisho starting up ####")
             logging.info("{} exists".format(CONFIG))
-            print("\nWelcome to Daisho")
+            print("\nWelcome to Daisho.")
             # Check if we are able to connect to MongoDB.
             daisho_db.mongo_conn()
             self.daisho_help()
@@ -156,6 +159,7 @@ class Daisho(object):
                 "Priority": ""
             }
         }
+        pass
 
     def list_tasks(self, value="today"):
         """
