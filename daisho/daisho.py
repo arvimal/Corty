@@ -16,6 +16,15 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
+import os
+import logging
+import pathlib
+import configparser
+from prompt_toolkit import prompt
+from prompt_toolkit.history import FileHistory
+from prompt_toolkit.auto_suggest import AutoSuggestFromHistory
+from prompt_toolkit.contrib.completers import WordCompleter
+import daisho_db
 import sys
 if sys.version[0] != "3":
     print("\nDaisho requires Python v3.")
@@ -23,15 +32,7 @@ if sys.version[0] != "3":
     print("\n\t# python3.6 daisho.py\n")
     print("Exiting Daisho!\n")
     sys.exit(1)
-import os
-import logging
-import pathlib
-import configparser
-import daisho_db
-from prompt_toolkit import prompt
-from prompt_toolkit.history import FileHistory
-from prompt_toolkit.auto_suggest import AutoSuggestFromHistory
-from prompt_toolkit.contrib.completers import WordCompleter
+
 
 HOME = os.getenv('HOME')
 DAISHO_HOME = HOME + "/.config/daisho/"
@@ -50,7 +51,7 @@ class Daisho(object):
             logging.basicConfig(filename=LOG_FILE, level=logging.INFO)
             logging.info("#### Daisho starting up ####")
             logging.info("{} exists".format(CONFIG))
-            print("\nWelcome to Daisho.")
+            print("\n- Welcome to Daisho -\n")
             # Check if we are able to connect to MongoDB.
             daisho_db.mongo_conn()
             self.daisho_help()
@@ -58,7 +59,7 @@ class Daisho(object):
             logging.info("Started Daisho prompt.")
 
         else:
-            print("\nWelcome to Daisho.\n")
+            print("\n- Welcome to Daisho -\n")
             print("Initial setup:")
             print("\tCreating Daisho's configurations")
 
@@ -147,7 +148,7 @@ class Daisho(object):
         }
         for key in fields:
             fields[key] = input("{0:10} : ".format(key))
-        print(fields)  # Added for self info
+        # print(fields)  # Added for self info
         print()
         # Process the dict `fields` before sending to
         # mongodb via daisho_db.add_data()

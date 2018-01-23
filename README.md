@@ -4,7 +4,7 @@
 
 [Daisho](https://en.wikipedia.org/wiki/Daish%C5%8D), in Japanese, means `big-little`.
 
-This application aims to be small and simple, while aiming to solve big problems.
+This application aims to be small and simple, while aiming to solve big problems [which can always remain debatable :)].
 
 **NOTE:**
 

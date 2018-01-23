@@ -12,18 +12,19 @@ def mongo_conn():
     Connect to the local MongoDB
     Create the local db `daisho`, if it doesn't exist
     """
-    print("\nConnecting to MongoDB on {}.".format(PORT))
     try:
         connect = pymongo.MongoClient(HOST + ":" + PORT)
         # Connect to the `daisho` db (will create if non-existing)
         daisho_db = connect.daisho
         if connect.database_names():
-            print("Connection successful.")
+            pass
 
     except pymongo.errors.ConnectionFailure as err:
-        print("Failed to connect to {}".format(err))
-        print("Daisho requires an active MongoDB instance on localhost")
-        print("Check if the `mongod` service is running\n")
+        print("\nFailed to connect to MongoDB\n")
+        print(" * ERROR:- {}".format(err))
+        print("")
+        print(" * Daisho requires an active MongoDB instance on localhost")
+        print(" * Check if `mongod` service is running\n")
         sys.exit()
     return daisho_db
 
