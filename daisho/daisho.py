@@ -17,7 +17,6 @@
 # Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
 import os
-import logging
 import pathlib
 import configparser
 from prompt_toolkit import prompt
@@ -25,6 +24,7 @@ from prompt_toolkit.history import FileHistory
 from prompt_toolkit.auto_suggest import AutoSuggestFromHistory
 from prompt_toolkit.contrib.completers import WordCompleter
 import daisho_db
+import daisho_logger
 import sys
 if sys.version[0] != "3":
     print("\nDaisho requires Python v3.")
@@ -48,9 +48,7 @@ class Daisho(object):
         # Check existence of CONFIG
         # Move logging to its own file
         if all([pathlib.Path(CONFIG).exists()]):
-            logging.basicConfig(filename=LOG_FILE, level=logging.INFO)
-            logging.info("#### Daisho starting up ####")
-            logging.info("{} exists".format(CONFIG))
+
             print("\n- Welcome to Daisho -\n")
             # Check if we are able to connect to MongoDB.
             daisho_db.mongo_conn()
@@ -134,33 +132,6 @@ class Daisho(object):
                 sys.exit("\nExiting Daisho.\n")
             else:
                 self.daisho_help()
-
-    def add_tasks(self):
-        """
-        Adds your tasks
-        """
-        logging.info("Calling add_tasks()")
-        fields = {
-            "Subject": "",
-            "Date": "",
-            "Tags": "",
-            "Priority": ""
-        }
-        for key in fields:
-            fields[key] = input("{0:10} : ".format(key))
-        # print(fields)  # Added for self info
-        print()
-        # Process the dict `fields` before sending to
-        # mongodb via daisho_db.add_data()
-
-        fields_new = {
-            "Subject": {
-                "Date": "",
-                "Tags": "",
-                "Priority": ""
-            }
-        }
-        pass
 
     def list_tasks(self, value="today"):
         """
