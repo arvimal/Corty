@@ -25,6 +25,7 @@ from prompt_toolkit.auto_suggest import AutoSuggestFromHistory
 from prompt_toolkit.contrib.completers import WordCompleter
 import daisho_db
 import daisho_logger
+import daisho_add
 import sys
 if sys.version[0] != "3":
     print("\nDaisho requires Python v3.")

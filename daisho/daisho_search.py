@@ -16,8 +16,11 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
-import logging
+from daisho_db import mongo_conn
 
-logging.basicConfig(filename=LOG_FILE, level=logging.INFO)
-logging.info("#### Daisho starting up ####")
-logging.info("{} exists".format(CONFIG))
+
+def get_data(table, query):
+    """
+    Query the db and return data
+    """
+    return mongo_conn.daisho_db.table.find_one(query)

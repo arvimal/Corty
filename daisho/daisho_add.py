@@ -16,8 +16,31 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
-import logging
+from prompt_toolkit.history import FileHistory
+from prompt_toolkit.contrib.completers import WordCompleter
+from prompt_toolkit import prompt
+import daisho_db
 
-logging.basicConfig(filename=LOG_FILE, level=logging.INFO)
-logging.info("#### Daisho starting up ####")
-logging.info("{} exists".format(CONFIG))
+ADD_HISTORY = "/tmp/add_cmd.txt"
+
+
+def add_tasks(self):
+    """
+    Adds your tasks
+    """
+    fields = {
+        "Subject": "",
+        "Date": "",
+        "Tags": "",
+        "Priority": ""
+    }
+
+    for key in fields:
+        fields[key] = prompt("{0:10} : ".format(
+            key), history=FileHistory(ADD_HISTORY))
+    # print(fields)  # Added for self info
+    print()
+    # Process the dict `fields` before sending to
+    # mongodb via daisho_db.add_data()
+
+    pass
