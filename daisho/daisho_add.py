@@ -19,12 +19,21 @@
 from prompt_toolkit.history import FileHistory
 from prompt_toolkit.contrib.completers import WordCompleter
 from prompt_toolkit import prompt
-import daisho_db
+from daisho_db import mongo_conn
 
 ADD_HISTORY = "/tmp/add_cmd.txt"
 
 
-def add_tasks(self):
+def add_tasks(data):
+    """
+    Add entries in the db
+    """
+    mongo_conn.daisho_db.subject.insert(data)
+    # mongo_conn.daisho_db.table.insert(data)
+    pass
+
+
+def sort_tasks(self):
     """
     Adds your tasks
     """
@@ -40,7 +49,8 @@ def add_tasks(self):
             key), history=FileHistory(ADD_HISTORY))
     # print(fields)  # Added for self info
     print()
+    add_data(fields)
     # Process the dict `fields` before sending to
-    # mongodb via daisho_db.add_data()
+    # mongodb via add_data()
 
     pass

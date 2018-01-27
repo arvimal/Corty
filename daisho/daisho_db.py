@@ -45,13 +45,6 @@ def mongo_conn():
     return daisho_db
 
 
-def add_data(data):
-    """
-    Add entries in the db
-    """
-    mongo_conn.daisho_db.subject.insert(data)
-    # mongo_conn.daisho_db.table.insert(data)
-    pass
 
 
 if __name__ == "__main__":
