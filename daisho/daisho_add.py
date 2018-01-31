@@ -16,41 +16,61 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
+import os
 from prompt_toolkit.history import FileHistory
 from prompt_toolkit.contrib.completers import WordCompleter
 from prompt_toolkit import prompt
 from daisho_db import mongo_conn
 
-ADD_HISTORY = "/tmp/add_cmd.txt"
+HOME = os.getenv('HOME')
+DAISHO_HOME = HOME + "/.config/daisho/"
+ADD_HISTORY = DAISHO_HOME + "add_cmd.txt"
 
 
-def add_tasks(data):
-    """
-    Add entries in the db
-    """
-    mongo_conn.daisho_db.subject.insert(data)
-    # mongo_conn.daisho_db.table.insert(data)
-    pass
-
-
-def sort_tasks(self):
+def add_prompt(self, job_type=None):
     """
     Adds your tasks
     """
-    fields = {
-        "Subject": "",
-        "Date": "",
-        "Tags": "",
-        "Priority": ""
-    }
+    if job_type == "task":
+        task_fields = {
+             "Subject": "",
+            "Date": "",
+            "Tags": [],
+            "Priority": ""
+        }
 
-    for key in fields:
-        fields[key] = prompt("{0:10} : ".format(
-            key), history=FileHistory(ADD_HISTORY))
-    # print(fields)  # Added for self info
-    print()
-    add_data(fields)
+        for key in fields:
+            fields[key] = prompt("{:>10} : ".format(
+                key), history=FileHistory(ADD_HISTORY))
+        print()
+        add_tasks(task_fields)
+
+    elif job_type == "note":
+        note_fields = {
+            "Subject" : "",
+            "Date" : "",
+            "Tags" : [],
+            "Priority" : "",
+            "Note" : ""
+        }
+        print()
+        add_notes(note_fields)
     # Process the dict `fields` before sending to
     # mongodb via add_data()
+    else:
+        pass
 
-    pass
+def add_tasks(task_dict):
+    """
+    Add tasks entries in the db
+    """
+    print("Adding your task to the database!")
+    # mongo_conn.daisho_db.table.insert(data)
+    print(task_dict)
+
+def add_note(note_dict):
+    """
+    Add note entries in the db
+    """
+    print("Adding your note to the database!")
+    print(note_dict)
