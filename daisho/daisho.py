@@ -16,6 +16,13 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
+import sys
+if sys.version[0] != "3":
+    print("\nDaisho requires Python v3.")
+    print("Install Python v3, or use the v3 binary to run `daisho.py` if already installed.")
+    print("\n\t# python3.6 daisho.py\n")
+    print("Exiting!\n")
+    sys.exit(1)
 import os
 import pathlib
 import configparser
@@ -26,14 +33,6 @@ from prompt_toolkit.contrib.completers import WordCompleter
 import daisho_db
 import daisho_logger
 import daisho_add
-import sys
-if sys.version[0] != "3":
-    print("\nDaisho requires Python v3.")
-    print("Install Python v3, or use the v3 binary to run `daisho.py` if already installed.")
-    print("\n\t# python3.6 daisho.py\n")
-    print("Exiting Daisho!\n")
-    sys.exit(1)
-
 
 HOME = os.getenv('HOME')
 DAISHO_HOME = HOME + "/.config/daisho/"
@@ -50,7 +49,7 @@ class Daisho(object):
         # Move logging to its own file
         if all([pathlib.Path(CONFIG).exists()]):
 
-            print("\n- Welcome to Daisho -\n")
+            print("\n\t- Welcome to Daisho -\n")
             # Check if we are able to connect to MongoDB.
             daisho_db.mongo_conn()
             self.daisho_help()
@@ -58,7 +57,7 @@ class Daisho(object):
             logging.info("Started Daisho prompt.")
 
         else:
-            print("\n- Welcome to Daisho -\n")
+            print("\n\t- Welcome to Daisho -\n")
             print("Initial setup:")
             print("\tCreating Daisho's configurations")
 
@@ -93,11 +92,11 @@ class Daisho(object):
         Daisho's Usage
         """
         print("\nUsage:")
-        print(" 1. add <to-do>          - Add a new to-do.")
-        print(" 2. search <key-word>    - Search for a keyword.")
-        print(" 3. list <day>           - List to-dos for the day.")
-        print(" 4. help                 - Prints this help message. ")
-        print(" 5. quit                 - Quits Daisho. \n")
+        print(" 1. add note | task               - Add a new to-do.")
+        print(" 2. search <keyword>              - Search for a keyword.")
+        print(" 3. list <day> | all | pending    - List to-dos for the day.")
+        print(" *  help                          - Prints this help message. ")
+        print(" *  quit                          - Quits Daisho. \n")
         pass
 
     def daisho_prompt(self):
@@ -121,16 +120,26 @@ class Daisho(object):
             # Split the input to a list
             value = daisho_prompt.split(" ")
             # Branch out based on inputs
-            if value[0] == 'add':
-                self.add_tasks()
+            if value[0] == 'add' and value[0] is None:
+                print(" - Choose from either `note` or `task`.\n")
+                self.daisho_prompt()
+            if value[0] == 'add' and value[1] == "note":
+                daisho_add.add_prompt(self, job_type="note")
+            if value[0] == 'add' and value[1] == "task":
+                daisho_add.add_prompt(self, job_type="task")
+
             elif value[0] == 'list':
                 self.list_tasks(value)
+
             elif value[0] == 'search':
                 self.search_tasks(self, value)
+
             elif value[0] == 'help':
                 self.daisho_help()
+
             elif value[0] == 'quit':
                 sys.exit("\nExiting Daisho.\n")
+
             else:
                 self.daisho_help()
 
