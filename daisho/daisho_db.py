@@ -45,7 +45,5 @@ def mongo_conn():
     return daisho_db
 
 
-
-
 if __name__ == "__main__":
     mongo_conn()

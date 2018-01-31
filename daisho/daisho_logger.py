@@ -19,6 +19,6 @@
 import logging
 
 # Write daisho's own custom logger, with color coding.
-logging.basicConfig(filename=LOG_FILE, level=logging.INFO)
-logging.info("#### Daisho starting up ####")
-logging.info("{} exists".format(CONFIG))
+#logging.basicConfig(filename=LOG_FILE, level=logging.INFO)
+#logging.info("#### Daisho starting up ####")
+#logging.info("{} exists".format(CONFIG))
