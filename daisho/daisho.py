@@ -126,8 +126,13 @@ class Daisho(object):
 
             if value[0] == 'add' and value[1].lower() == "note":
                 daisho_add.add_prompt(self, job_type="note")
+                # Returning back to daisho_prompt() via recursion
+                self.daisho_prompt()
+
             if value[0] == 'add' and value[1].lower() == "task":
                 daisho_add.add_prompt(self, job_type="task")
+                # Returning back to daisho_prompt() via recursion
+                self.daisho_prompt()
 
             elif value[0] == 'list':
                 self.list_tasks(value)

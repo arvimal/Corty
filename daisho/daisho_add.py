@@ -33,7 +33,7 @@ def add_prompt(self, job_type=None):
     """
     if job_type == "task":
         task_fields = {
-             "Subject": "",
+            "Subject": "",
             "Date": "",
             "Tags": [],
             "Priority": ""
@@ -47,11 +47,11 @@ def add_prompt(self, job_type=None):
 
     elif job_type == "note":
         note_fields = {
-            "Subject" : "",
-            "Date" : "",
-            "Tags" : [],
-            "Priority" : "",
-            "Note" : ""
+            "Subject": "",
+            "Date": "",
+            "Tags": [],
+            "Priority": "",
+            "Note": ""
         }
         print(" - Creating a note.\n")
         for key in note_fields:
@@ -65,19 +65,24 @@ def add_prompt(self, job_type=None):
         # add_prompt(self, job_type)
         pass
 
+
 def add_task(task_dict):
     """
     Add tasks entries in the db
     """
+    print(task_dict)
+    # Remove this for a cleaner message
     print("Adding your task to the database!")
     # mongo_conn.daisho_db.table.insert(data)
-    print(task_dict)
     print("\nTask added!")
+    # Return back to `daisho_prompt()`
+
 
 def add_note(note_dict):
     """
     Add note entries in the db
     """
-    print("Adding your note to the database!")
     print(note_dict)
+    # Remove this for a cleaner message
+    print("Adding your note to the database!")
     print("\nNote added!")
