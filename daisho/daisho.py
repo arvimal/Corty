@@ -110,7 +110,7 @@ class Daisho(object):
             'help',
             'quit'
         ]
-        keyword_completer = WordCompleter(cmd_list)
+        keyword_completer = WordCompleter(cmd_list, ignore_case=True)
 
         while True:
             daisho_prompt = prompt("daisho ->> ",
@@ -120,13 +120,13 @@ class Daisho(object):
             # Split the input to a list
             value = daisho_prompt.split(" ")
             # Branch out based on inputs
-            if len(value) == 1 and value[0] == "add":
+            if len(value) == 1 and value[0].lower() == "add":
                 print(" - `add` takes either `note` or `task`.\n")
                 self.daisho_prompt()
 
-            if value[0] == 'add' and value[1] == "note":
+            if value[0] == 'add' and value[1].lower() == "note":
                 daisho_add.add_prompt(self, job_type="note")
-            if value[0] == 'add' and value[1] == "task":
+            if value[0] == 'add' and value[1].lower() == "task":
                 daisho_add.add_prompt(self, job_type="task")
 
             elif value[0] == 'list':
