@@ -38,12 +38,12 @@ def add_prompt(self, job_type=None):
             "Tags": [],
             "Priority": ""
         }
-
-        for key in fields:
-            fields[key] = prompt("{:>10} : ".format(
+        print(" - Creating a task.\n")
+        for key in task_fields:
+            task_fields[key] = prompt("{:>10} : ".format(
                 key), history=FileHistory(ADD_HISTORY))
         print()
-        add_tasks(task_fields)
+        add_task(task_fields)
 
     elif job_type == "note":
         note_fields = {
@@ -53,20 +53,26 @@ def add_prompt(self, job_type=None):
             "Priority" : "",
             "Note" : ""
         }
+        print(" - Creating a note.\n")
+        for key in note_fields:
+            note_fields[key] = prompt("{:>10} : ".format(
+                key), history=FileHistory(ADD_HISTORY))
         print()
-        add_notes(note_fields)
+        add_note(note_fields)
     # Process the dict `fields` before sending to
     # mongodb via add_data()
     else:
+        # add_prompt(self, job_type)
         pass
 
-def add_tasks(task_dict):
+def add_task(task_dict):
     """
     Add tasks entries in the db
     """
     print("Adding your task to the database!")
     # mongo_conn.daisho_db.table.insert(data)
     print(task_dict)
+    print("\nTask added!")
 
 def add_note(note_dict):
     """
@@ -74,3 +80,4 @@ def add_note(note_dict):
     """
     print("Adding your note to the database!")
     print(note_dict)
+    print("\nNote added!")
