@@ -120,9 +120,10 @@ class Daisho(object):
             # Split the input to a list
             value = daisho_prompt.split(" ")
             # Branch out based on inputs
-            if value[0] == 'add' and value[0] is None:
-                print(" - Choose from either `note` or `task`.\n")
+            if len(value) == 1 and value[0] == "add":
+                print(" - `add` takes either `note` or `task`.\n")
                 self.daisho_prompt()
+
             if value[0] == 'add' and value[1] == "note":
                 daisho_add.add_prompt(self, job_type="note")
             if value[0] == 'add' and value[1] == "task":
