@@ -40,7 +40,7 @@ def mongo_conn():
         print(" * ERROR:- {}".format(err))
         print("")
         print(" * Daisho requires an active MongoDB instance on localhost")
-        print(" * Check if `mongod` service is running\n")
+        print(" * Check if `mongod` service is running")
         sys.exit()
     return daisho_db
 

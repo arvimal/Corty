@@ -96,7 +96,7 @@ class Daisho(object):
         Daisho's Usage
         """
         print("\nUsage:")
-        print(" 1. add note | task               - Add a new to-do.")
+        print(" 1. add [note] | [task]           - Add a new to-do.")
         print(" 2. search <keyword>              - Search for a keyword.")
         print(" 3. list <day> | all | pending    - List to-dos for the day.")
         print(" *  help                          - Prints this help message. ")
@@ -125,7 +125,7 @@ class Daisho(object):
             value = daisho_prompt.split(" ")
             # Branch out based on inputs
             if len(value) == 1 and value[0].lower() == "add":
-                print(" - `add` takes either `note` or `task`.\n")
+                print(" - `add` takes either `note` or `task`, as argument.\n")
                 self.daisho_prompt()
 
             if value[0] == 'add' and value[1].lower() == "note":
