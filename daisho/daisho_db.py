@@ -44,6 +44,24 @@ def mongo_conn():
         sys.exit()
     return daisho_db
 
+def mongo_add_task(self, task_dict):
+    """
+    We conect to MongoDB here,
+    to add our tasks
+    """
+    # Add the conector and note adder here
+    print("\nTask added!")
+    pass
+
+
+def mongo_add_note(self, note_dict):
+    """
+    We conect to mongodb here, 
+    to add our notes
+    """
+    # Add the conector and note adder here
+    print("\nNote added!")
+    pass
 
 if __name__ == "__main__":
     mongo_conn()
