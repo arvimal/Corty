@@ -65,7 +65,6 @@ def add_prompt(self, job_type=None):
         # add_prompt(self, job_type)
         pass
 
-
 def add_task(task_dict):
     """
     Add tasks entries in the db
@@ -73,9 +72,6 @@ def add_task(task_dict):
     print(task_dict)
     print("Adding your task to the database!")
     mongo_add_task(self, task_dict)
-    # Return back to `daisho_prompt()`
-    self.daisho_prompt()
-
 
 def add_note(note_dict):
     """
@@ -85,6 +81,3 @@ def add_note(note_dict):
     # Remove this for a cleaner message
     print("Adding your note to the database!")
     mongo_add_note(self, task_dict)
-    # Return back to `daisho_prompt()`
-    self.daisho_prompt()
-
