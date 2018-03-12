@@ -23,4 +23,4 @@ import logging
 #logging.info("#### Daisho starting up ####")
 #logging.info("{} exists".format(CONFIG))
 
-logging.basicConfig(logging.level=DEBUG)
+#logging.basicConfig(logging.level=DEBUG)

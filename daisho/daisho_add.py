@@ -21,6 +21,8 @@ from prompt_toolkit.history import FileHistory
 from prompt_toolkit.contrib.completers import WordCompleter
 from prompt_toolkit import prompt
 from daisho_db import mongo_conn, mongo_add_note, mongo_add_task
+# Remove this at last, if only used for printing debug output.
+import pprint 
 
 HOME = os.getenv('HOME')
 DAISHO_HOME = HOME + "/.config/daisho/"
@@ -69,15 +71,16 @@ def add_task(task_dict):
     """
     Add tasks entries in the db
     """
-    print(task_dict)
+    pprint.pprint(task_dict)
     print("Adding your task to the database!")
-    mongo_add_task(self, task_dict)
+    mongo_add_task(task_dict)
 
 def add_note(note_dict):
     """
     Add note entries in the db
     """
-    print(note_dict)
-    # Remove this for a cleaner message
+    # Cleanup: Remove print() and set logger here.
+    pprint.pprint(note_dict)
+    # Cleanup: Remove print() and set logger here. 
     print("Adding your note to the database!")
-    mongo_add_note(self, task_dict)
+    mongo_add_note(note_dict)

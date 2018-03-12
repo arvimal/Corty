@@ -44,7 +44,7 @@ def mongo_conn():
         sys.exit()
     return daisho_db
 
-def mongo_add_task(self, task_dict):
+def mongo_add_task(task_dict):
     """
     We conect to MongoDB here,
     to add our tasks
@@ -54,7 +54,7 @@ def mongo_add_task(self, task_dict):
     pass
 
 
-def mongo_add_note(self, note_dict):
+def mongo_add_note(note_dict):
     """
     We conect to mongodb here, 
     to add our notes
