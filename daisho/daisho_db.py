@@ -18,6 +18,7 @@
 
 import pymongo
 import sys
+import daisho_logger
 
 HOST = "localhost"
 PORT = "27017"

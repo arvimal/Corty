@@ -21,6 +21,8 @@ from prompt_toolkit.history import FileHistory
 from prompt_toolkit.contrib.completers import WordCompleter
 from prompt_toolkit import prompt
 from daisho_db import mongo_conn, mongo_add_note, mongo_add_task
+import daisho_logger
+
 # Remove this at last, if only used for printing debug output.
 import pprint 
 

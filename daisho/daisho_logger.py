@@ -18,9 +18,13 @@
 
 import logging
 
-# Write daisho's own custom logger, with color coding.
-#logging.basicConfig(filename=LOG_FILE, level=logging.INFO)
-#logging.info("#### Daisho starting up ####")
-#logging.info("{} exists".format(CONFIG))
+LOG_FILE = DAISHO_HOME + "daisho.log"
 
-#logging.basicConfig(logging.level=DEBUG)
+# Write daisho's own custom logger, with color coding.
+logging.basicConfig(format='%(asctime)s %(levelname)s %(message)s',
+                    datefmt='%m/%d/%Y %I:%M:%S %p',
+                    level=logging.INFO)
+
+
+
+

@@ -42,7 +42,6 @@ HOME = os.getenv('HOME')
 DAISHO_HOME = HOME + "/.config/daisho/"
 CONFIG = DAISHO_HOME + "daisho.conf"
 HISTORY = DAISHO_HOME + "history.txt"
-LOG_FILE = DAISHO_HOME + "daisho.log"
 
 
 class Daisho(object):
