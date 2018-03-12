@@ -18,11 +18,12 @@
 
 import pymongo
 import sys
-import daisho_logger
+import logging
 
 HOST = "localhost"
 PORT = "27017"
 
+logging.getLogger(__name__)
 
 def mongo_conn():
     """

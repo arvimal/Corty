@@ -21,15 +21,12 @@ from prompt_toolkit.history import FileHistory
 from prompt_toolkit.contrib.completers import WordCompleter
 from prompt_toolkit import prompt
 from daisho_db import mongo_conn, mongo_add_note, mongo_add_task
-import daisho_logger
-
-# Remove this at last, if only used for printing debug output.
-import pprint 
+import logging
 
 HOME = os.getenv('HOME')
 DAISHO_HOME = HOME + "/.config/daisho/"
 ADD_HISTORY = DAISHO_HOME + "add_cmd.txt"
-
+logger = logging.getLogger(__name__)
 
 def add_prompt(self, job_type=None):
     """

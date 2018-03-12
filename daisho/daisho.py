@@ -30,6 +30,7 @@ import daisho_db
 import daisho_logger
 import daisho_add
 #--
+import logging
 import sys
 if sys.version[0] != "3":
     print("\nDaisho requires Python v3.")
@@ -42,7 +43,7 @@ HOME = os.getenv('HOME')
 DAISHO_HOME = HOME + "/.config/daisho/"
 CONFIG = DAISHO_HOME + "daisho.conf"
 HISTORY = DAISHO_HOME + "history.txt"
-
+logging.getLogger(__name__)
 
 class Daisho(object):
     """Daisho's main class"""
