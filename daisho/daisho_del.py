@@ -17,18 +17,7 @@
 # Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
 """
-This module searching existing notes and tasks based on 
-patterns and regular expressions.
+This module removes the tasks and notes from the list.
+
+This inturn calls the del and rm functions in daisho_db.py
 """
-
-import logging
-from daisho_db import mongo_conn
-
-logger = logging.getLogger(__name__)
-
-
-def get_data(table, query):
-    """
-    Query the db and return data
-    """
-    return mongo_conn.daisho_db.table.find_one(query)
