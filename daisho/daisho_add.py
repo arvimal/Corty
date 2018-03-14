@@ -16,19 +16,26 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
+"""
+This module deals with adding the notes and tasks,
+as well as editing them later.
+"""
+
 import os
 from prompt_toolkit.history import FileHistory
 from prompt_toolkit.contrib.completers import WordCompleter
 from prompt_toolkit import prompt
 from daisho_db import mongo_conn, mongo_add_note, mongo_add_task
 import logging
+import pprint
 
+logger = logging.getLogger(__name__)
 HOME = os.getenv('HOME')
 DAISHO_HOME = HOME + "/.config/daisho/"
 ADD_HISTORY = DAISHO_HOME + "add_cmd.txt"
-logger = logging.getLogger(__name__)
 
-def add_prompt(self, job_type=None):
+
+def add_prompt(job_type=None):
     """
     Adds your tasks
     """
@@ -66,6 +73,7 @@ def add_prompt(self, job_type=None):
         # add_prompt(self, job_type)
         pass
 
+
 def add_task(task_dict):
     """
     Add tasks entries in the db
@@ -74,12 +82,18 @@ def add_task(task_dict):
     print("Adding your task to the database!")
     mongo_add_task(task_dict)
 
+
 def add_note(note_dict):
     """
     Add note entries in the db
     """
     # Cleanup: Remove print() and set logger here.
     pprint.pprint(note_dict)
-    # Cleanup: Remove print() and set logger here. 
+    # Cleanup: Remove print() and set logger here.
     print("Adding your note to the database!")
     mongo_add_note(note_dict)
+
+
+def edit_prompt(job_type=None, element_number=None):
+    
+

@@ -27,7 +27,6 @@ from prompt_toolkit.auto_suggest import AutoSuggestFromHistory
 from prompt_toolkit.contrib.completers import WordCompleter
 #--
 import daisho_db
-import daisho_logger
 import daisho_add
 #--
 import logging
@@ -44,6 +43,7 @@ DAISHO_HOME = HOME + "/.config/daisho/"
 CONFIG = DAISHO_HOME + "daisho.conf"
 HISTORY = DAISHO_HOME + "history.txt"
 logging.getLogger(__name__)
+
 
 class Daisho(object):
     """Daisho's main class"""
@@ -111,6 +111,10 @@ class Daisho(object):
             'add',
             'list',
             'search',
+            'edit',
+            'open',
+            'rm',
+            'del'
             'help',
             'quit'
         ]

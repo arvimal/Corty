@@ -21,6 +21,7 @@ from daisho_db import mongo_conn
 
 logger = logging.getLogger(__name__)
 
+
 def get_data(table, query):
     """
     Query the db and return data

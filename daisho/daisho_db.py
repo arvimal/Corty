@@ -23,7 +23,7 @@ import logging
 HOST = "localhost"
 PORT = "27017"
 
-logging.getLogger(__name__)
+logger = logging.getLogger(__name__)
 
 def mongo_conn():
     """
@@ -62,6 +62,7 @@ def mongo_add_note(note_dict):
     to add our notes
     """
     # Add the conector and note adder here
+    logger.log
     print("\nNote added!")
     pass
 
