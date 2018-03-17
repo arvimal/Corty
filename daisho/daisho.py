@@ -1,20 +1,26 @@
 #!/usr/bin/env python3
 
-# Copyright (C) 2016 Vimal A.R <arvimal@yahoo.in>
+# MIT License
 
-# This program is free software; you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation; either version 2 of the License, or
-# (at your option) any later version.
+# Copyright (C) 2018 Vimal A.R <arvimal@yahoo.in>
 
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files(the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
 
-# You should have received a copy of the GNU General Public License
-# along with this program; if not, write to the Free Software
-# Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
 
 import os
 import pathlib
@@ -96,11 +102,15 @@ class Daisho(object):
         Daisho's Usage
         """
         print("\nUsage:")
-        print(" 1. add [note] | [task]           - Add a new to-do.")
-        print(" 2. search <keyword>              - Search for a keyword.")
-        print(" 3. list <day> | all | pending    - List to-dos for the day.")
-        print(" *  help                          - Prints this help message. ")
-        print(" *  quit                          - Quits Daisho. \n")
+        print("1. add  [note] | [task]            - Add a new note or task.")
+        print("2. list [day]  | [all] | [pending] - List to-dos for the day.")
+        print("3. edit [note] | [task]  <number>  - Edit a note or task ")
+        print("4. open [note] | [task]  <number>  - Open a note or task to show more info")
+        print("5. rm   [note] | [task]  <number>  - Remove a note or task.")
+        print("6. del  [note] | [task]  <number>  - Delete a note or task permanently.")
+        print("7. search <keyword>                - Search for a keyword.\n")
+        print(" *  help                            - Prints this help message.")
+        print(" *  quit                            - Quits Daisho. \n")
         pass
 
     def daisho_prompt(self):
@@ -133,12 +143,12 @@ class Daisho(object):
                 self.daisho_prompt()
 
             if value[0] == 'add' and value[1].lower() == "note":
-                daisho_add.add_prompt(self, job_type="note")
+                daisho_add.add_prompt(job_type="note")
                 # Returning back to daisho_prompt() via recursion
                 self.daisho_prompt()
 
             if value[0] == 'add' and value[1].lower() == "task":
-                daisho_add.add_prompt(self, job_type="task")
+                daisho_add.add_prompt(job_type="task")
                 # Returning back to daisho_prompt() via recursion
                 self.daisho_prompt()
 
