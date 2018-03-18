@@ -22,9 +22,10 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-import pymongo
-import sys
 import logging
+import sys
+
+import pymongo
 
 HOST = "localhost"
 PORT = "27017"

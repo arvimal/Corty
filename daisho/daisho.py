@@ -22,21 +22,21 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-import os
-import pathlib
 import configparser
 import datetime
-#--
+import logging
+import os
+import pathlib
+import sys
+
 from prompt_toolkit import prompt
-from prompt_toolkit.history import FileHistory
 from prompt_toolkit.auto_suggest import AutoSuggestFromHistory
 from prompt_toolkit.contrib.completers import WordCompleter
-#--
-import daisho_db
+from prompt_toolkit.history import FileHistory
+
 import daisho_add
-#--
-import logging
-import sys
+import daisho_db
+
 if sys.version[0] != "3":
     print("\nDaisho requires Python v3.")
     print("Use Python v3 (if already installed), or install it to use `daisho.py`")

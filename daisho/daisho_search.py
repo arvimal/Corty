@@ -28,6 +28,7 @@ patterns and regular expressions.
 """
 
 import logging
+
 from daisho_db import mongo_conn
 
 logger = logging.getLogger(__name__)

@@ -27,13 +27,15 @@ This module deals with adding the notes and tasks,
 as well as editing them later.
 """
 
-import os
-from prompt_toolkit.history import FileHistory
-from prompt_toolkit.contrib.completers import WordCompleter
-from prompt_toolkit import prompt
-from daisho_db import mongo_conn, mongo_add_note, mongo_add_task
 import logging
+import os
 import pprint
+
+from prompt_toolkit import prompt
+from prompt_toolkit.contrib.completers import WordCompleter
+from prompt_toolkit.history import FileHistory
+
+from daisho_db import mongo_add_note, mongo_add_task, mongo_conn
 
 logger = logging.getLogger(__name__)
 HOME = os.getenv('HOME')
