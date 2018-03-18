@@ -48,7 +48,7 @@ HOME = os.getenv('HOME')
 DAISHO_HOME = HOME + "/.config/daisho/"
 CONFIG = DAISHO_HOME + "daisho.conf"
 HISTORY = DAISHO_HOME + "history.txt"
-logging.getLogger(__name__)
+daisho_logger = logging.getLogger(__name__)
 
 
 class Daisho(object):
@@ -56,15 +56,14 @@ class Daisho(object):
 
     def __init__(self):
         # Check existence of CONFIG
-        # Move logging to its own file
         if all([pathlib.Path(CONFIG).exists()]):
-
+            daisho_logger.info("{} exists, Welcome to Daisho".format(pathlib.Path(CONFIG)))
             print("\n\t- Welcome to Daisho -\n")
             # Check if we are able to connect to MongoDB.
             daisho_db.mongo_conn()
             self.daisho_help()
             self.daisho_prompt()
-            logging.info("Started Daisho prompt.")
+            daisho_logger.info("Started Daisho prompt.")
 
         else:
             print("\n\t- Welcome to Daisho -\n")

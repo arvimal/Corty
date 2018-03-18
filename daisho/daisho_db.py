@@ -31,6 +31,7 @@ PORT = "27017"
 
 logger = logging.getLogger(__name__)
 
+
 def mongo_conn():
     """
     Connect to the local MongoDB
@@ -52,6 +53,7 @@ def mongo_conn():
         sys.exit()
     return daisho_db
 
+
 def mongo_add_task(task_dict):
     """
     We conect to MongoDB here,
@@ -64,13 +66,14 @@ def mongo_add_task(task_dict):
 
 def mongo_add_note(note_dict):
     """
-    We conect to mongodb here, 
+    We conect to mongodb here,
     to add our notes
     """
     # Add the conector and note adder here
     logger.debug("Note added")
     print("\nNote added!")
     pass
+
 
 if __name__ == "__main__":
     mongo_conn()

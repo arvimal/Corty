@@ -23,7 +23,7 @@
 # SOFTWARE.
 
 """
-This module searching existing notes and tasks based on 
+This module searching existing notes and tasks based on
 patterns and regular expressions.
 """
 

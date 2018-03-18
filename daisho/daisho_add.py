@@ -84,7 +84,7 @@ def add_task(task_dict):
     """
     Add tasks entries in the db
     """
-    pprint.pprint(task_dict)
+    print(task_dict)
     print("Adding your task to the database!")
     mongo_add_task(task_dict)
 

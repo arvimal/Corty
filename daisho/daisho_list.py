@@ -23,10 +23,9 @@
 # SOFTWARE.
 
 """
-* This module deals with listing the tasks and notes, 
+* This module deals with listing the tasks and notes,
 based on various criteria.
 
-* This also takes care on opening tasks which has active sub-tasks, 
+* This also takes care on opening tasks which has active sub-tasks,
 as well as notes in the pre-configured editor of your choice.
 """
-
