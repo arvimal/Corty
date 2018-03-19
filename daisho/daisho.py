@@ -57,7 +57,8 @@ class Daisho(object):
     def __init__(self):
         # Check existence of CONFIG
         if all([pathlib.Path(CONFIG).exists()]):
-            daisho_logger.info("{} exists, Welcome to Daisho".format(pathlib.Path(CONFIG)))
+            daisho_logger.info(
+                "{} exists, Welcome to Daisho".format(pathlib.Path(CONFIG)))
             print("\n\t- Welcome to Daisho -\n")
             # Check if we are able to connect to MongoDB.
             daisho_db.mongo_conn()
@@ -104,9 +105,11 @@ class Daisho(object):
         print("1. add  [note] | [task]            - Add a new note or task.")
         print("2. list [day]  | [all] | [pending] - List to-dos for the day.")
         print("3. edit [note] | [task]  <number>  - Edit a note or task ")
-        print("4. open [note] | [task]  <number>  - Open a note or task to show more info")
+        print(
+            "4. open [note] | [task]  <number>  - Open a note or task to show more info")
         print("5. rm   [note] | [task]  <number>  - Remove a note or task.")
-        print("6. del  [note] | [task]  <number>  - Delete a note or task permanently.")
+        print(
+            "6. del  [note] | [task]  <number>  - Delete a note or task permanently.")
         print("7. search <keyword>                - Search for a keyword.\n")
         print(" *  help                            - Prints this help message.")
         print(" *  quit                            - Quits Daisho. \n")
@@ -135,36 +138,44 @@ class Daisho(object):
                                    auto_suggest=AutoSuggestFromHistory(),
                                    completer=keyword_completer)
             # Split the input to a list
-            value = daisho_prompt.split(" ")
-            # Branch out based on inputs
-            if len(value) == 1 and value[0].lower() == "add":
-                print(" - `add` takes either `note` or `task`, as argument.\n")
-                self.daisho_prompt()
+            key_word = value[0].lower()
 
-            if value[0] == 'add' and value[1].lower() == "note":
-                daisho_add.add_prompt(job_type="note")
-                # Returning back to daisho_prompt() via recursion
-                self.daisho_prompt()
+            if value[0].lower() in cmd_list:
+                # Case 1: key_word is `help` or `quit`
+                # `help` and `quit` are cases wher a single arg is valid.
+                # `list` without args should list all tasks and notes (A feature)
+                if len(value) == 1:
+                    if key_word == "help":
+                        self.daisho_help()
+                    elif key_word == "quit":
+                        sys.exit("\nExiting Daisho.\n")
+                    elif key_word == "list":
+                        self.list_tasks(criteria="all")
+                    else:
+                        self.daisho_help()
 
-            if value[0] == 'add' and value[1].lower() == "task":
-                daisho_add.add_prompt(job_type="task")
-                # Returning back to daisho_prompt() via recursion
-                self.daisho_prompt()
+                elif len(value) > 1:
+                    # Case 2: key_word is "add"
+                    if key_word == "add":
+                        if value[1].lower() == "note":
+                            daisho_add.add_prompt(job_type="note")
+                            # Returning back to daisho_prompt() via recursion
+                            self.daisho_prompt()
+                        elif value[1].lower() == "task":
+                            daisho_add.add_prompt(job_type="task")
+                            # Returning back to daisho_prompt() via recursion
+                            self.daisho_prompt()
+                        else:
+                            self.daisho_help()
+                            self.daisho_prompt()
 
-            elif value[0] == 'list':
-                self.list_tasks(value)
+                    # Case 3: key_word is "list"
+                    if key_word == "list":
+                        if value[1].lower() == "today":
+                            daisho_.list_tasks()
 
-            elif value[0] == 'search':
-                self.search_tasks(self, value)
-
-            elif value[0] == 'help':
-                self.daisho_help()
-
-            elif value[0] == 'quit':
-                sys.exit("\nExiting Daisho.\n")
-
-            else:
-                self.daisho_help()
+                        else:
+                            self.daisho_help()
 
     def list_tasks(self, value="today"):
         """
