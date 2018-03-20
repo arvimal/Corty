@@ -139,14 +139,16 @@ class Daisho(object):
                                    auto_suggest=AutoSuggestFromHistory(),
                                    completer=keyword_completer)
             # Split the input to a list
-            value = daisho_prompt.split(" ")
-            key_word = value[0].lower()
+            # values = daisho_prompt.split(" ")
+            values = [i for i in daisho_prompt.split()]
+            print("Values: {}".format(values))
+            key_word = values[0].lower()
 
             if key_word in cmd_list:
                 # Case 1: key_word is `help` / `quit` / `list`
                 # `help` and `quit` are cases where a single arg is valid.
                 # `list` without args should list all tasks and notes [Feature]
-                if len(value) == 1:
+                if len(values) == 1:
                     if key_word == "help":
                         self.daisho_help()
                     elif key_word == "quit":
@@ -157,14 +159,14 @@ class Daisho(object):
                         self.daisho_help()
                         self.daisho_prompt()
 
-                elif len(value) > 1:
+                elif len(values) > 1:
                     # Case 2: key_word is "add"
                     if key_word == "add":
-                        if value[1].lower() == "note":
+                        if values[1].lower() == "note":
                             daisho_add.add_prompt(job_type="note")
                             # Returning back to daisho_prompt() via recursion
                             self.daisho_prompt()
-                        elif value[1].lower() == "task":
+                        elif values[1].lower() == "task":
                             daisho_add.add_prompt(job_type="task")
                             # Returning back to daisho_prompt() via recursion
                             self.daisho_prompt()
@@ -174,45 +176,52 @@ class Daisho(object):
 
                     # Case 3: key_word is "list"
                     if key_word == "list":
-                        if value[1].lower() == "all":
-                            self.list_tasks(criteria="all")
-                        elif value[1].lower() == "today":
-                            self.list_tasks(criteria="today")
-                        elif value[1].lower() == "tags":
-                            self.list_tasks(criteria="tags")
-                        elif value[1].lower() == "prio":
-                            self.list_tasks(criteria="prio")
-                        elif value[1].lower() == "trash":
-                            self.list_tasks(criteria="trash")
+                        list_args = [
+                            "all",
+                            "today",
+                            "tags",
+                            "prio",
+                            "trash"
+                            ]
+                        if values[1].lower() in list_args:
+                            self.list_tasks(criteria=values[1].lower())
                         else:
-                            self.daisho_help()
+                            print(self.list_tasks.__doc__)
                             self.daisho_prompt()
 
                     # Case 4: key_word is "edit"
-                    if key_word == "edit":
+                    if key_word == "edit" and len(values) == 3:
                         try:
-                            job_type, num = (value[1].lower(), int(value[2]))
-                            if job_type == "task":
-                                self.edit_tasks(job_type=job_type, number=num)
-                            elif job_type == "note":
-                                self.edit_tasks(job_type=job_type, number=num)
-                            else:
-                                print("`edit` takes in either `task` or `note` to edit.")
-                                self.daisho_prompt()
-                        except (ValueError, IndexError) as err:
-                            print("`edit` expects a task/note number to work on.")
+                            job_type, num = (values[1].lower(), int(values[2]))
+                        except (valuesError, IndexError) as err:
+                            print("`edit` expects a task/note number to work on.\n")
                             self.daisho_prompt()
+                        if job_type == "task":
+                            self.edit_jobs(job_type=job_type, number=num)
+                        elif job_type == "note":
+                            self.edit_jobs(job_type=job_type, number=num)
+                        else:
+                            print("`edit` takes in either `task` or `note` to edit.\n")
+                            self.daisho_prompt()
+                    elif key_word == "edit" and len(values) == 2:
+                        print("`edit` takes either `task` or `note` as argument.\n")
+                        self.daisho_prompt()
+
             else:
-                # if value[0].lower() not in list
+                # if values[0].lower() not in list
                 self.daisho_help()
 
-    def list_tasks(self, criteria="all"):
+    def list_tasks(self, criteria=None):
         """
-        List tasks based on dates and fuzzy inputs,
-        Ex: today, tomorrow, yesterday, date etc.
+    `list` accepts the following arguments:
+        * all
+        * today
+        * date, in `DD-MM-YYYY` format
+        * tags
+        * prio
+        * trash
         """
-        print(self.list_tasks.__doc__)
-        logging.info("Calling list_tasks()")
+        print("List called with argument `{}`".format(criteria))
         pass
 
     def search_tasks(self, *args):
@@ -223,7 +232,7 @@ class Daisho(object):
         logging.info("Calling search_tasks()")
         pass
 
-    def edit_tasks(self, job_type, number):
+    def edit_jobs(self, job_type, number):
         print("\nEditing {}: #{}\n".format(job_type, number))
 
 
