@@ -190,6 +190,23 @@ class Daisho(object):
                             self.daisho_prompt()
 
                     # Case 4: key_word is "edit"
+                    if key_word == "edit":
+                        edit_args = [
+                            "task",
+                            "note"
+                        ]
+                        if values[1].lower() in edit_args:
+                            if values[2] and type(values[2]) is int:
+                                try:
+                                    job_type, num = (values[1].lower(), int(values[2]))
+                                    self.edit_jobs(job_type=job_type, number=num)
+                                except (ValueError, IndexError) as err:
+                                    print("`edit` expects a task/note number.\n")
+                                    self.daisho_prompt()
+                            else:
+                                print("`edit` expects a task/note number.\n")
+                                self.daisho_prompt()
+                    """
                     if key_word == "edit" and len(values) == 3:
                         try:
                             job_type, num = (values[1].lower(), int(values[2]))
@@ -206,6 +223,7 @@ class Daisho(object):
                     elif key_word == "edit" and len(values) == 2:
                         print("`edit` takes either `task` or `note` as argument.\n")
                         self.daisho_prompt()
+                    """
 
             else:
                 # if values[0].lower() not in list
