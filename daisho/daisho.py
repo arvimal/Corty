@@ -188,7 +188,20 @@ class Daisho(object):
                             self.daisho_help()
                             self.daisho_prompt()
 
-                    # Case 4: key_word is ""
+                    # Case 4: key_word is "edit"
+                    if key_word == "edit":
+                        try:
+                            job_type, num = (value[1].lower(), int(value[2]))
+                            if job_type == "task":
+                                self.edit_tasks(job_type=job_type, number=num)
+                            elif job_type == "note":
+                                self.edit_tasks(job_type=job_type, number=num)
+                            else:
+                                print("`edit` takes in either `task` or `note` to edit.")
+                                self.daisho_prompt()
+                        except (ValueError, IndexError) as err:
+                            print("`edit` expects a task/note number to work on.")
+                            self.daisho_prompt()
             else:
                 # if value[0].lower() not in list
                 self.daisho_help()
@@ -209,6 +222,9 @@ class Daisho(object):
         print(self.search_tasks.__doc__)
         logging.info("Calling search_tasks()")
         pass
+
+    def edit_tasks(self, job_type, number):
+        print("\nEditing {}: #{}\n".format(job_type, number))
 
 
 if __name__ == "__main__":
