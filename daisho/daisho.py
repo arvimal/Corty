@@ -36,6 +36,7 @@ from prompt_toolkit.history import FileHistory
 
 import daisho_add
 import daisho_db
+import daisho_list
 
 if sys.version[0] != "3":
     print("\nDaisho requires Python v3.")
@@ -138,12 +139,13 @@ class Daisho(object):
                                    auto_suggest=AutoSuggestFromHistory(),
                                    completer=keyword_completer)
             # Split the input to a list
+            value = daisho_prompt.split(" ")
             key_word = value[0].lower()
 
-            if value[0].lower() in cmd_list:
-                # Case 1: key_word is `help` or `quit`
-                # `help` and `quit` are cases wher a single arg is valid.
-                # `list` without args should list all tasks and notes (A feature)
+            if key_word in cmd_list:
+                # Case 1: key_word is `help` / `quit` / `list`
+                # `help` and `quit` are cases where a single arg is valid.
+                # `list` without args should list all tasks and notes [Feature]
                 if len(value) == 1:
                     if key_word == "help":
                         self.daisho_help()
@@ -153,6 +155,7 @@ class Daisho(object):
                         self.list_tasks(criteria="all")
                     else:
                         self.daisho_help()
+                        self.daisho_prompt()
 
                 elif len(value) > 1:
                     # Case 2: key_word is "add"
@@ -171,13 +174,26 @@ class Daisho(object):
 
                     # Case 3: key_word is "list"
                     if key_word == "list":
-                        if value[1].lower() == "today":
-                            daisho_.list_tasks()
-
+                        if value[1].lower() == "all":
+                            self.list_tasks(criteria="all")
+                        elif value[1].lower() == "today":
+                            self.list_tasks(criteria="today")
+                        elif value[1].lower() == "tags":
+                            self.list_tasks(criteria="tags")
+                        elif value[1].lower() == "prio":
+                            self.list_tasks(criteria="prio")
+                        elif value[1].lower() == "trash":
+                            self.list_tasks(criteria="trash")
                         else:
                             self.daisho_help()
+                            self.daisho_prompt()
 
-    def list_tasks(self, value="today"):
+                    # Case 4: key_word is ""
+            else:
+                # if value[0].lower() not in list
+                self.daisho_help()
+
+    def list_tasks(self, criteria="all"):
         """
         List tasks based on dates and fuzzy inputs,
         Ex: today, tomorrow, yesterday, date etc.

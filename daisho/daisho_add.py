@@ -23,7 +23,7 @@
 # SOFTWARE.
 
 """
-This module deals with adding the notes and tasks,
+This module deals with adding notes and tasks, 
 as well as editing them later.
 """
 
