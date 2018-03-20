@@ -141,7 +141,7 @@ class Daisho(object):
             # Split the input to a list
             # values = daisho_prompt.split(" ")
             values = [i for i in daisho_prompt.split()]
-            print("Values: {}".format(values))
+            # print("Values: {}".format(values))
             key_word = values[0].lower()
 
             if key_word in cmd_list:
@@ -196,35 +196,21 @@ class Daisho(object):
                             "note"
                         ]
                         if values[1].lower() in edit_args:
-                            if values[2] and type(values[2]) is int:
-                                try:
-                                    job_type, num = (values[1].lower(), int(values[2]))
-                                    self.edit_jobs(job_type=job_type, number=num)
-                                except (ValueError, IndexError) as err:
-                                    print("`edit` expects a task/note number.\n")
-                                    self.daisho_prompt()
-                            else:
-                                print("`edit` expects a task/note number.\n")
+                            try:
+                                if values[2]:
+                                    try:
+                                        job_type, num = (values[1].lower(), int(values[2]))
+                                        self.edit_jobs(job_type=job_type, number=num)
+                                    except (ValueError, IndexError) as err:
+                                        print(self.edit_jobs.__doc__)
+                                        self.daisho_prompt()
+                            except IndexError:
+                                print(self.edit_jobs.__doc__)
                                 self.daisho_prompt()
-                    """
-                    if key_word == "edit" and len(values) == 3:
-                        try:
-                            job_type, num = (values[1].lower(), int(values[2]))
-                        except (valuesError, IndexError) as err:
-                            print("`edit` expects a task/note number to work on.\n")
-                            self.daisho_prompt()
-                        if job_type == "task":
-                            self.edit_jobs(job_type=job_type, number=num)
-                        elif job_type == "note":
-                            self.edit_jobs(job_type=job_type, number=num)
                         else:
-                            print("`edit` takes in either `task` or `note` to edit.\n")
+                            # print("`edit` takes either `task` or `note` as argument.")
+                            print(self.edit_jobs.__doc__)
                             self.daisho_prompt()
-                    elif key_word == "edit" and len(values) == 2:
-                        print("`edit` takes either `task` or `note` as argument.\n")
-                        self.daisho_prompt()
-                    """
-
             else:
                 # if values[0].lower() not in list
                 self.daisho_help()
@@ -251,6 +237,15 @@ class Daisho(object):
         pass
 
     def edit_jobs(self, job_type, number):
+        """
+    `edit` accepts the following arguments, and a number.
+        * note
+        * task
+
+    Example:
+        ->> edit note 4 # To edit the 4th note in the list.
+        ->> edit task 3 # To edit the 5th task in the list.
+        """
         print("\nEditing {}: #{}\n".format(job_type, number))
 
 
