@@ -139,9 +139,7 @@ class Daisho(object):
                                    auto_suggest=AutoSuggestFromHistory(),
                                    completer=keyword_completer)
             # Split the input to a list
-            # values = daisho_prompt.split(" ")
             values = [i for i in daisho_prompt.split()]
-            # print("Values: {}".format(values))
             key_word = values[0].lower()
 
             if key_word in cmd_list:
@@ -162,16 +160,15 @@ class Daisho(object):
                 elif len(values) > 1:
                     # Case 2: key_word is "add"
                     if key_word == "add":
-                        if values[1].lower() == "note":
-                            daisho_add.add_prompt(job_type="note")
-                            # Returning back to daisho_prompt() via recursion
-                            self.daisho_prompt()
-                        elif values[1].lower() == "task":
-                            daisho_add.add_prompt(job_type="task")
-                            # Returning back to daisho_prompt() via recursion
+                        add_args = [
+                            "note",
+                            "task"
+                            ]
+                        if values[1].lower() in add_args:
+                            daisho_add.add_prompt(job_type=values[1].lower())
                             self.daisho_prompt()
                         else:
-                            self.daisho_help()
+                            print(daisho_add.add_prompt.__doc__)
                             self.daisho_prompt()
 
                     # Case 3: key_word is "list"
@@ -201,7 +198,7 @@ class Daisho(object):
                                     try:
                                         job_type, num = (values[1].lower(), int(values[2]))
                                         self.edit_jobs(job_type=job_type, number=num)
-                                    except (ValueError, IndexError) as err:
+                                    except ValueError:
                                         print(self.edit_jobs.__doc__)
                                         self.daisho_prompt()
                             except IndexError:
