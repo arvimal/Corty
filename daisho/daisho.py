@@ -230,10 +230,11 @@ class Daisho(object):
 
     def search_tasks(self, *args):
         """
-        Search tasks based on keywords
+        `search` accepts a keyword to search.
+        
+        It returns the notes and tasks which contain the keyword.
         """
         print(self.search_tasks.__doc__)
-        logging.info("Calling search_tasks()")
         pass
 
     def edit_jobs(self, job_type, number):
