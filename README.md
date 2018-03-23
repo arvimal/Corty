@@ -18,6 +18,14 @@ Python v2 will be deprecated by 2020. Make sure you check [https://pythonclock.o
 
 ### 2. How does Daisho work?
 
+**Daisho** requires the following packages to function properly. 
+
+        1. MongoDB
+        2. Colorama
+        3. python3-prompt_toolkit
+
+The steps to install them discussed are in the respective sections. 
+
 #### 2.1. Front-end
 
 Daisho has to be started from the terminal, where it will wait for the user's inputs and act accordingly.
@@ -31,6 +39,8 @@ Fedora ships the package, and can be installed with:
 ```bash
 # dnf install python3-prompt_toolkit
 ```
+
+Daisho uses the `colorama` module to colorize the output. 
 
 #### 2.2. Back-end
 

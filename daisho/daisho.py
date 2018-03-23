@@ -34,12 +34,13 @@ from prompt_toolkit.auto_suggest import AutoSuggestFromHistory
 from prompt_toolkit.contrib.completers import WordCompleter
 from prompt_toolkit.history import FileHistory
 
+import colorama
 import daisho_add
 import daisho_db
 import daisho_list
 
 if sys.version[0] != "3":
-    print("\nDaisho requires Python v3.")
+    print(f"{colorama.Fore.RED}\nDaisho requires Python v3.{colorama.Style.RESET_ALL}")
     print("Use Python v3 (if already installed), or install it to use `daisho.py`")
     print("\n\t# python3.6 daisho.py\n")
     print("Exiting!\n")
@@ -60,7 +61,8 @@ class Daisho(object):
         if all([pathlib.Path(CONFIG).exists()]):
             daisho_logger.info(
                 "{} exists, Welcome to Daisho".format(pathlib.Path(CONFIG)))
-            print("\n\t- Welcome to Daisho -\n")
+            #print("\n\t- Welcome to Daisho -\n")
+            print(f"{colorama.Fore.RED}\n\t- Welcome to Daisho -\n{colorama.Style.RESET_ALL}")
             # Check if we are able to connect to MongoDB.
             daisho_db.mongo_conn()
             self.daisho_help()
@@ -240,7 +242,7 @@ class Daisho(object):
 
     Example:
         ->> edit note 4 # To edit the 4th note in the list.
-        ->> edit task 3 # To edit the 5th task in the list.
+        ->> edit task 3 # To edit the 3rd task in the list.
         """
         print("\nEditing {}: #{}\n".format(job_type, number))
 
