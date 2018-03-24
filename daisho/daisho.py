@@ -34,13 +34,12 @@ from prompt_toolkit.auto_suggest import AutoSuggestFromHistory
 from prompt_toolkit.contrib.completers import WordCompleter
 from prompt_toolkit.history import FileHistory
 
-import colorama
 import daisho_add
 import daisho_db
 import daisho_list
 
 if sys.version[0] != "3":
-    print(f"{colorama.Fore.RED}\nDaisho requires Python v3.{colorama.Style.RESET_ALL}")
+    print("\nDaisho requires Python v3.")
     print("Use Python v3 (if already installed), or install it to use `daisho.py`")
     print("\n\t# python3.6 daisho.py\n")
     print("Exiting!\n")
@@ -61,8 +60,7 @@ class Daisho(object):
         if all([pathlib.Path(CONFIG).exists()]):
             daisho_logger.info(
                 "{} exists, Welcome to Daisho".format(pathlib.Path(CONFIG)))
-            #print("\n\t- Welcome to Daisho -\n")
-            print(f"{colorama.Fore.RED}\n\t- Welcome to Daisho -\n{colorama.Style.RESET_ALL}")
+            print("\n\t- Welcome to Daisho -\n")
             # Check if we are able to connect to MongoDB.
             daisho_db.mongo_conn()
             self.daisho_help()
@@ -208,6 +206,31 @@ class Daisho(object):
                             # print("`edit` takes either `task` or `note` as argument.")
                             print(self.edit_jobs.__doc__)
                             self.daisho_prompt()
+
+                    # Case 5: key_word is "open"
+                    if key_word == "open":
+                        open_args = [
+                            "task",
+                            "note"
+                        ]
+                        if values[1].lower() in open_args:
+                            try:
+                                if values[2]:
+                                    try:
+                                        job_type, num = (
+                                            values[1].lower(), int(values[2]))
+                                        self.open_jobs(job_type=job_type, number=num)
+                                    except ValueError:
+                                        print(self.open_jobs.__doc__)
+                                        self.daisho_prompt()
+                            except IndexError:
+                                print(self.open_jobs.__doc__)
+                                self.daisho_prompt()
+                        else:
+                            # print("`edit` takes either `task` or `note` as argument.")
+                            print(self.open_jobs.__doc__)
+                            self.daisho_prompt()
+
             else:
                 # if values[0].lower() not in list
                 self.daisho_help()
@@ -227,9 +250,9 @@ class Daisho(object):
 
     def search_tasks(self, *args):
         """
-        `search` accepts a keyword to search.
+        `search` accepts a keyword, to search.
         
-        It returns the notes and tasks which contain the keyword.
+        It returns the notes / tasks which contain the keyword.
         """
         print(self.search_tasks.__doc__)
         pass
@@ -242,10 +265,21 @@ class Daisho(object):
 
     Example:
         ->> edit note 4 # To edit the 4th note in the list.
-        ->> edit task 3 # To edit the 3rd task in the list.
+        ->> edit task 3 # To edit the 5th task in the list.
         """
         print("\nEditing {}: #{}\n".format(job_type, number))
 
+    def open_jobs(self, job_type, number):
+        """
+    `open` accepts the following arguments, and a number.
+        * note
+        * task
+
+    Example:
+        ->> open note 4 # To open the 4th note in the list.
+        ->> open task 3 # To open the 5th task in the list.
+        """
+        print("\nEditing {}: #{}\n".format(job_type, number))
 
 if __name__ == "__main__":
     my_daisho = Daisho()
