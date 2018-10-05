@@ -40,7 +40,8 @@ import daisho_list
 
 if sys.version[0] != "3":
     print("\nDaisho requires Python v3.")
-    print("Use Python v3 (if already installed), or install it to use `daisho.py`")
+    print("Install Python v3 using the distribution package manager, and
+    execute:)
     print("\n\t# python3.6 daisho.py\n")
     print("Exiting!\n")
     sys.exit(1)
