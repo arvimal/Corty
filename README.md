@@ -8,13 +8,17 @@ This application aims to be small and simple, while aiming to solve big problems
 
 **NOTE:**
 
-Daisho is written for v3. Make sure you have Python v3 installed on the machine, and call `daisho.py` with `python3.6`.
+Daisho is written for Python version 3. Make sure you have it installedi, and execute `daisho.py` as:
 
 ```bash
 # pythonv3.6 daisho.py
 ```
 
-Python v2 will be deprecated by 2020. Make sure you check [https://pythonclock.org/](https://pythonclock.org/).
+* Why is Daisho stressing on Python version 3?
+
+Python v2 will be deprecated by 2020. Hence, there seems to be no point in creating software on versions that are going to be deprecated in such a short time. 
+
+Make sure you check [https://pythonclock.org/](https://pythonclock.org/).
 
 ### 2. How does Daisho work?
 
