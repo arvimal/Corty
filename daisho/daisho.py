@@ -40,8 +40,7 @@ import daisho_list
 
 if sys.version[0] != "3":
     print("\nDaisho requires Python v3.")
-    print("Install Python v3 using the distribution package manager, and
-    execute:)
+    print("Install Python v3 using your package manager, and execute:")
     print("\n\t# python3.6 daisho.py\n")
     print("Exiting!\n")
     sys.exit(1)
@@ -252,7 +251,7 @@ class Daisho(object):
     def search_tasks(self, *args):
         """
         `search` accepts a keyword, to search.
-        
+
         It returns the notes / tasks which contain the keyword.
         """
         print(self.search_tasks.__doc__)

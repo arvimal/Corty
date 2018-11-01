@@ -8,7 +8,7 @@ import unittest
 from click.testing import CliRunner
 
 from daisho import daisho
-from daisho import cli
+#from daisho import cli
 
 
 class TestDaisho(unittest.TestCase):
