@@ -16,25 +16,25 @@ Daisho is written for Python version 3. Make sure you have it installedi, and ex
 
 * Why is Daisho stressing on Python version 3?
 
-Python v2 will be deprecated by 2020. Hence, there seems to be no point in creating software on versions that are going to be deprecated in such a short time. 
+Python v2 will be deprecated by 2020. Hence, there seems to be no point in creating software on versions that are going to be deprecated in such a short time.
 
 Make sure you check [https://pythonclock.org/](https://pythonclock.org/).
 
 ### 2. How does Daisho work?
 
-**Daisho** requires the following packages to function properly. 
+**Daisho** requires the following packages to function properly.
 
         1. MongoDB
         2. Colorama
         3. python3-prompt_toolkit
 
-The steps to install them discussed are in the respective sections. 
+The steps to install them discussed are in the respective sections.
 
 #### 2.1. Front-end
 
 Daisho has to be started from the terminal, where it will wait for the user's inputs and act accordingly.
 
-A help section is shown to the user, prior the application allows the user to interact with it. 
+A help section is shown to the user, prior the application allows the user to interact with it.
 
 Daisho uses the awesome `prompt_toolkit` framework to list command completions, save command-history etc. Make sure you have the `python3-prompt_toolkit` installed.
 
@@ -44,7 +44,7 @@ Fedora ships the package, and can be installed with:
 # dnf install python3-prompt_toolkit
 ```
 
-Daisho uses the `colorama` module to colorize the output. 
+Daisho uses the `colorama` module to colorize the output.
 
 #### 2.2. Back-end
 
@@ -52,7 +52,7 @@ Daisho uses a MongoDB database running on localhost to store user-data.
 
 Hence, it is imperative to have MongoDB running on localhost, listening on the default port of `27017`.
 
-Since `Daisho` is written and tested on a `Fedora 27` machine, the following steps to install and configure MongoDB cater to Fedora. 
+Since `Daisho` is written and tested on a `Fedora 27` machine, the following steps to install and configure MongoDB cater to Fedora.
 
 Other distributions may refer their mode of package installation.
 
@@ -61,7 +61,7 @@ Other distributions may refer their mode of package installation.
 
 # sudo systemctl start mongod
 
-# sudo systemctl status mongod         
+# sudo systemctl status mongod
 ● mongod.service - High-performance, schema-free document-oriented database
    Loaded: loaded (/usr/lib/systemd/system/mongod.service; disabled; vendor preset: disabled)
    Active: active (running) since Tue 2018-01-09 15:09:15 IST; 14min ago

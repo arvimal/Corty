@@ -38,7 +38,7 @@ from prompt_toolkit.history import FileHistory
 from daisho_db import mongo_add_note, mongo_add_task, mongo_conn
 
 logger = logging.getLogger(__name__)
-HOME = os.getenv('HOME')
+HOME = os.getenv("HOME")
 DAISHO_HOME = HOME + "/.config/daisho/"
 ADD_HISTORY = DAISHO_HOME + "add_cmd.txt"
 
@@ -54,16 +54,12 @@ Example:
     ->> add note # To add a note to Daisho.
     """
     if job_type == "task":
-        task_fields = {
-            "Subject": "",
-            "Date": "",
-            "Tags": [],
-            "Priority": ""
-        }
+        task_fields = {"Subject": "", "Date": "", "Tags": [], "Priority": ""}
         print(" - Creating a task.\n")
         for key in task_fields:
-            task_fields[key] = prompt("{:>10} : ".format(
-                key), history=FileHistory(ADD_HISTORY))
+            task_fields[key] = prompt(
+                "{:>10} : ".format(key), history=FileHistory(ADD_HISTORY)
+            )
         print()
         add_task(task_fields)
 
@@ -73,12 +69,13 @@ Example:
             "Date": "",
             "Tags": [],
             "Priority": "",
-            "Note": ""
+            "Note": "",
         }
         print(" - Creating a note.\n")
         for key in note_fields:
-            note_fields[key] = prompt("{:>10} : ".format(
-                key), history=FileHistory(ADD_HISTORY))
+            note_fields[key] = prompt(
+                "{:>10} : ".format(key), history=FileHistory(ADD_HISTORY)
+            )
         print()
         add_note(note_fields)
     # Process the dict `fields` before sending to

@@ -45,7 +45,7 @@ if sys.version[0] != "3":
     print("Exiting!\n")
     sys.exit(1)
 
-HOME = os.getenv('HOME')
+HOME = os.getenv("HOME")
 DAISHO_HOME = HOME + "/.config/daisho/"
 CONFIG = DAISHO_HOME + "daisho.conf"
 HISTORY = DAISHO_HOME + "history.txt"
@@ -59,7 +59,8 @@ class Daisho(object):
         # Check existence of CONFIG
         if all([pathlib.Path(CONFIG).exists()]):
             daisho_logger.info(
-                "{} exists, Welcome to Daisho".format(pathlib.Path(CONFIG)))
+                "{} exists, Welcome to Daisho".format(pathlib.Path(CONFIG))
+            )
             print("\n\t- Welcome to Daisho -\n")
             # Check if we are able to connect to MongoDB.
             daisho_db.mongo_conn()
@@ -76,7 +77,7 @@ class Daisho(object):
             pathlib.Path(DAISHO_HOME).mkdir()
             pathlib.Path(CONFIG).touch(exist_ok=True)
             pathlib.Path(HISTORY).touch(exist_ok=True)
-            pathlib.Path(LOG_FILE).touch(exist_ok=True)
+            # pathlib.Path(LOG_FILE).touch(exist_ok=True)
             # Write Daisho's configuration file
             conf_parser = configparser.ConfigParser()
             conf_parser.add_section("Global")
@@ -118,24 +119,16 @@ class Daisho(object):
         """
         Daisho's prompt.
         """
-        cmd_list = [
-            'add',
-            'list',
-            'search',
-            'edit',
-            'open',
-            'rm',
-            'del'
-            'help',
-            'quit'
-        ]
+        cmd_list = ["add", "list", "search", "edit", "open", "rm", "del" "help", "quit"]
         keyword_completer = WordCompleter(cmd_list, ignore_case=True)
 
         while True:
-            daisho_prompt = prompt("daisho ->> ",
-                                   history=FileHistory(HISTORY),
-                                   auto_suggest=AutoSuggestFromHistory(),
-                                   completer=keyword_completer)
+            daisho_prompt = prompt(
+                "daisho ->> ",
+                history=FileHistory(HISTORY),
+                auto_suggest=AutoSuggestFromHistory(),
+                completer=keyword_completer,
+            )
             # Split the input to a list
             values = [i for i in daisho_prompt.split()]
             key_word = values[0].lower()
@@ -158,10 +151,7 @@ class Daisho(object):
                 elif len(values) > 1:
                     # Case 2: key_word is "add"
                     if key_word == "add":
-                        add_args = [
-                            "note",
-                            "task"
-                            ]
+                        add_args = ["note", "task"]
                         if values[1].lower() in add_args:
                             daisho_add.add_prompt(job_type=values[1].lower())
                             self.daisho_prompt()
@@ -171,13 +161,7 @@ class Daisho(object):
 
                     # Case 3: key_word is "list"
                     if key_word == "list":
-                        list_args = [
-                            "all",
-                            "today",
-                            "tags",
-                            "prio",
-                            "trash"
-                            ]
+                        list_args = ["all", "today", "tags", "prio", "trash"]
                         if values[1].lower() in list_args:
                             self.list_tasks(criteria=values[1].lower())
                         else:
@@ -186,15 +170,15 @@ class Daisho(object):
 
                     # Case 4: key_word is "edit"
                     if key_word == "edit":
-                        edit_args = [
-                            "task",
-                            "note"
-                        ]
+                        edit_args = ["task", "note"]
                         if values[1].lower() in edit_args:
                             try:
                                 if values[2]:
                                     try:
-                                        job_type, num = (values[1].lower(), int(values[2]))
+                                        job_type, num = (
+                                            values[1].lower(),
+                                            int(values[2]),
+                                        )
                                         self.edit_jobs(job_type=job_type, number=num)
                                     except ValueError:
                                         print(self.edit_jobs.__doc__)
@@ -209,16 +193,15 @@ class Daisho(object):
 
                     # Case 5: key_word is "open"
                     if key_word == "open":
-                        open_args = [
-                            "task",
-                            "note"
-                        ]
+                        open_args = ["task", "note"]
                         if values[1].lower() in open_args:
                             try:
                                 if values[2]:
                                     try:
                                         job_type, num = (
-                                            values[1].lower(), int(values[2]))
+                                            values[1].lower(),
+                                            int(values[2]),
+                                        )
                                         self.open_jobs(job_type=job_type, number=num)
                                     except ValueError:
                                         print(self.open_jobs.__doc__)
@@ -280,6 +263,7 @@ class Daisho(object):
         ->> open task 3 # To open the 5th task in the list.
         """
         print("\nEditing {}: #{}\n".format(job_type, number))
+
 
 if __name__ == "__main__":
     my_daisho = Daisho()
