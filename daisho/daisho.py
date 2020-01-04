@@ -34,6 +34,10 @@ from prompt_toolkit.auto_suggest import AutoSuggestFromHistory
 from prompt_toolkit.contrib.completers import WordCompleter
 from prompt_toolkit.history import FileHistory
 
+from prompt_toolkit.shortcuts import print_tokens
+from prompt_toolkit.styles import style_from_dict
+from pygments.token import Token
+
 import daisho_add
 import daisho_db
 import daisho_list
