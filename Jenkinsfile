@@ -1,10 +1,9 @@
 pipeline {
   agent any
   stages {
-    stage('error') {
+    stage('Initializing') {
       steps {
-        echo 'Starting build'
-        fileExists 'daisho.py'
+        sh 'echo "Starting Jenkins"'
       }
     }
 
