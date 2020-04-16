@@ -5,6 +5,7 @@
 
 
 import unittest
+
 from click.testing import CliRunner
 
 from daisho import daisho
