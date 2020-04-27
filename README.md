@@ -1,6 +1,6 @@
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
-## Daisho - Your own TO-DO manager
+## Daisho - A CLI todo manager
 
 ### 1. Introduction
 
@@ -8,19 +8,7 @@
 
 This application aims to be small and simple, while aiming to solve big problems [which can always remain debatable :)].
 
-**NOTE:**
-
-Daisho is written for Python version 3. Make sure you have it installedi, and execute `daisho.py` as:
-
-```bash
-# pythonv3.6 daisho.py
-```
-
-* Why is Daisho stressing on Python version 3?
-
-Python v2 will be deprecated by 2020. Hence, there seems to be no point in creating software on versions that are going to be deprecated in such a short time.
-
-Make sure you check [https://pythonclock.org/](https://pythonclock.org/).
+**NOTE:** Daisho is written in Python v3.
 
 ### 2. How does Daisho work?
 

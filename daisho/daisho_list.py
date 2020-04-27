@@ -23,9 +23,21 @@
 # SOFTWARE.
 
 """
-* This module deals with listing the tasks and notes,
-based on various criteria.
+daisho_list handles listing the tasks and notes, based on filters.
 
-* This also takes care on opening tasks which has active sub-tasks,
+`filters` are one of the following:
+
+* all [default]
+* today
+* tomorrow
+* date [`DD-MM-YYYY`]
+* tags [#tag_val]
+* prio [#high, #med, #low]
+* trash
+
+This also takes care on opening tasks which has active sub-tasks,
 as well as notes in the pre-configured editor of your choice.
 """
+
+def list_all(val="all"):
+    pass
