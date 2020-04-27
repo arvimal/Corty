@@ -25,7 +25,7 @@
 """
 daisho_list handles listing the tasks and notes, based on filters.
 
-`filters` are one of the following:
+`filters` are any one of the following:
 
 * all [default]
 * today
@@ -38,6 +38,9 @@ daisho_list handles listing the tasks and notes, based on filters.
 This also takes care on opening tasks which has active sub-tasks,
 as well as notes in the pre-configured editor of your choice.
 """
+
+from daisho import daisho_db
+
 
 def list_all(val="all"):
     pass

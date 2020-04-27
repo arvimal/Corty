@@ -38,9 +38,9 @@ from prompt_toolkit.history import FileHistory
 from prompt_toolkit.shortcuts import ProgressBar
 from pygments.token import Token
 
-import daisho_add
-import daisho_db
-import daisho_list
+from daisho import daisho_add
+from daisho import daisho_db
+from daisho import daisho_list
 
 
 if sys.version[0] != "3":

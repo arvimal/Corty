@@ -4,47 +4,38 @@
 
 ### 1. Introduction
 
-[Daisho](https://en.wikipedia.org/wiki/Daish%C5%8D), in Japanese, means `big-little`.
+[Daisho](https://en.wikipedia.org/wiki/Daish%C5%8D), means `big-little`.
 
-This application aims to be small and simple, while aiming to solve big problems [which can always remain debatable :)].
+The development of Daisho has been mainly in Fedora Linux.
+
+It aims to be simple, and easy to use. It is a CLI application, and supports command auto-completion, colour-coded outputs etc.
 
 **NOTE:** Daisho is written in Python v3.
 
 ### 2. How does Daisho work?
 
-**Daisho** requires the following packages to function properly.
+Daisho runs on CLI as a simple [REPL](https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop) that waits for user input.
 
-        1. MongoDB
-        2. Colorama
-        3. python3-prompt_toolkit
+A help is printed each time `Daisho` starts. This lists the primary commands available for the user.
 
-The steps to install them discussed are in the respective sections.
+Since it supports command auto-completion, the secondary commands available under a primary, are listed. The `Tab` key cycles through these and `Enter` selects it. This ensures the user is never searching for the supported options, and reduce the
 
-#### 2.1. Front-end
+Daisho uses MongoDB on the localhost, to store the user data.
 
-Daisho has to be started from the terminal, where it will wait for the user's inputs and act accordingly.
+The REPL ensures the connection to the back-end MongoDB server at start-up, and constantly checks it through a heart-beat signal.
 
-A help section is shown to the user, prior the application allows the user to interact with it.
+### 3. Installation
 
-Daisho uses the awesome `prompt_toolkit` framework to list command completions, save command-history etc. Make sure you have the `python3-prompt_toolkit` installed.
+**Daisho** requires the following packages.
 
-Fedora ships the package, and can be installed with:
+   1. MongoDB
+   2. python3-colorama
+   3. python3-prompt-toolkit
+   4. python3-pymongo
 
-```bash
-# dnf install python3-prompt_toolkit
-```
+Hence, it is imperative to have MongoDB running on localhost, listening on the default port `27017`.
 
-Daisho uses the `colorama` module to colorize the output.
-
-#### 2.2. Back-end
-
-Daisho uses a MongoDB database running on localhost to store user-data.
-
-Hence, it is imperative to have MongoDB running on localhost, listening on the default port of `27017`.
-
-Since `Daisho` is written and tested on a `Fedora 27` machine, the following steps to install and configure MongoDB cater to Fedora.
-
-Other distributions may refer their mode of package installation.
+Install MongoDB from their opensource release page. Other distributions may refer their mode of package installation.
 
 ```bash
 # sudo dnf install mongodb-server -y

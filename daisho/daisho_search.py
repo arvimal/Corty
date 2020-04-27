@@ -29,7 +29,7 @@ patterns and regular expressions.
 
 import logging
 
-from daisho_db import mongo_conn
+from daisho import daisho_db
 
 logger = logging.getLogger(__name__)
 
@@ -38,4 +38,5 @@ def get_data(table, query):
     """
     Query the db and return data
     """
-    return mongo_conn.daisho_db.table.find_one(query)
+    conn_query = daisho_db.mongo_conn()
+    return conn_query.daisho_db.table.find_one(query)
