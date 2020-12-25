@@ -226,13 +226,13 @@ class Daisho(object):
 
     def list_tasks(self, criteria=None):
         """
-    `list` accepts the following arguments:
-        * all
-        * today
-        * date, in `DD-MM-YYYY` format
-        * tags
-        * prio
-        * trash
+        `list` accepts the following arguments:
+            * all
+            * today
+            * date, in `DD-MM-YYYY` format
+            * tags
+            * prio
+            * trash
         """
         print("List called with argument `{}`".format(criteria))
         pass
@@ -248,29 +248,29 @@ class Daisho(object):
 
     def edit_jobs(self, job_type, number):
         """
-    `edit` accepts the following arguments, and a number.
-        * note
-        * task
+        `edit` accepts the following arguments, and a number.
+            * note
+            * task
 
-    Example:
-        ->> edit note 4 # To edit the 4th note in the list.
-        ->> edit task 3 # To edit the 5th task in the list.
+        Example:
+            ->> edit note 4 # To edit the 4th note in the list.
+            ->> edit task 3 # To edit the 5th task in the list.
         """
         print("\nEditing {}: #{}\n".format(job_type, number))
 
     def open_jobs(self, job_type, number):
         """
-    `open` accepts the following arguments, and a number.
-        * note
-        * task
+        `open` accepts the following arguments, and a number.
+            * note
+            * task
 
-    Example:
-        ->> open note 4 # To open the 4th note in the list.
-        ->> open task 3 # To open the 5th task in the list.
+        Example:
+            ->> open note 4 # To open the 4th note in the list.
+            ->> open task 3 # To open the 5th task in the list.
         """
         print("\nEditing {}: #{}\n".format(job_type, number))
 
 
 if __name__ == "__main__":
     my_daisho = Daisho()
-    my_daisho()
+    my_daisho
