@@ -34,14 +34,10 @@ from prompt_toolkit import prompt
 from prompt_toolkit.auto_suggest import AutoSuggestFromHistory
 from prompt_toolkit.completion import WordCompleter
 from prompt_toolkit.history import FileHistory
-
 from prompt_toolkit.shortcuts import ProgressBar
 from pygments.token import Token
 
-from daisho import daisho_add
-from daisho import daisho_db
-from daisho import daisho_list
-
+from daisho import daisho_add, daisho_db, daisho_list
 
 if sys.version[0] != "3":
     print("\nDaisho requires Python v3.")

@@ -32,7 +32,7 @@ def task_del(num):
     Delete tasks based on number
     """
     try:
-        import daisho, daisho_add
+        import daisho
+        import daisho_add
     except ImportError as e:
         print(e)
-    
