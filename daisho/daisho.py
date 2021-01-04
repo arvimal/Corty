@@ -55,7 +55,7 @@ daisho_logger = logging.getLogger(__name__)
 
 
 class Daisho(object):
-    """Daisho's main class"""
+    """Daisho's main class: Testing"""
 
     def __init__(self):
         # Check existence of CONFIG
