@@ -43,4 +43,8 @@ from daisho import daisho_db
 
 
 def list_all(val="all"):
-    pass
+
+    if val="today":
+        daisho_db.sys(search.today)
+    elif val="tomorrow":
+        daisho_db.sys(search.tomorrow)
