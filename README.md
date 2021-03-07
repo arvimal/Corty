@@ -32,9 +32,8 @@ The server uses MongoDB as its database backend. While starting up, the client e
    4. python3-pymongo
    5. python3-graphql-server
    6. python3-graphene
-   7. 
 
-Hence, it is imperative to have MongoDB running on localhost, listening on the default port `27017`.
+MongoDB has to be running on localhost (for now), listening on the default port `27017`. Splitting the database off, is something that should happen later.
 
 Install MongoDB from their opensource release page. Other distributions may refer their mode of package installation.
 
