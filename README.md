@@ -10,19 +10,17 @@ The development of Daisho has been mainly in Fedora Linux.
 
 It aims to be simple, and easy to use. It is a CLI application, and supports command auto-completion, colour-coded outputs etc.
 
-**NOTE:** Daisho is written in Python v3.
-
 ### 2. How does Daisho work?
 
-Daisho runs on CLI as a simple [REPL](https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop) that waits for user input.
+Daisho has a client-server architecture that communicates through a GraphQL API interface. 
 
-A help is printed each time `Daisho` starts. This lists the primary commands available for the user.
+The user interacts with the server through the daisho CLI, which is a [REPL](https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop) interface that waits for user input.
 
-Since it supports command auto-completion, the secondary commands available under a primary, are listed. The `Tab` key cycles through these and `Enter` selects it. This ensures the user is never searching for the supported options, and reduce the
+A help is printed each time `Daisho` starts. This helps the user with a quick overview of the primary commands available.  
 
-Daisho uses MongoDB on the localhost, to store the user data.
+Command auto-completion is supported, and a TAB press cycles through each primary. The `Enter` key selects the command. Once the primary command is selected, a second TAB lists the secondary level of commands specific to the selected primary. 
 
-The REPL ensures the connection to the back-end MongoDB server at start-up, and constantly checks it through a heart-beat signal.
+The server uses MongoDB as its database backend. While starting up, the client ensures that it has a proper connection to the server, as well as the MongoDB database. The connection is regularly checked through a heart-beat signal. 
 
 ### 3. Installation
 
@@ -32,6 +30,9 @@ The REPL ensures the connection to the back-end MongoDB server at start-up, and 
    2. python3-colorama
    3. python3-prompt-toolkit
    4. python3-pymongo
+   5. python3-graphql-server
+   6. python3-graphene
+   7. 
 
 Hence, it is imperative to have MongoDB running on localhost, listening on the default port `27017`.
 
