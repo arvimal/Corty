@@ -37,7 +37,9 @@ from prompt_toolkit.history import FileHistory
 from prompt_toolkit.shortcuts import ProgressBar
 from pygments.token import Token
 
-from daisho import daisho_add, daisho_db, daisho_list
+from client import daisho_add
+from client import daisho_db
+from client import daisho_list
 
 if sys.version[0] != "3":
     print("\nDaisho requires Python v3.")
