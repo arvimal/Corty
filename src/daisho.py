@@ -30,17 +30,11 @@ import pathlib
 import sys
 import time
 
-from prompt_toolkit import prompt
-from prompt_toolkit.auto_suggest import AutoSuggestFromHistory
-from prompt_toolkit.completion import WordCompleter
-from prompt_toolkit.history import FileHistory
-from prompt_toolkit.shortcuts import ProgressBar
-from pygments.token import Token
-
 from client import daisho_add
 from client import daisho_db
 from client import daisho_list
 from client import daisho_help
+from client import daisho_prompt
 
 if sys.version[0] != "3":
     print("\nDaisho requires Python v3")
@@ -68,7 +62,7 @@ class Daisho(object):
             # Check if we are able to connect to MongoDB.
             daisho_db.mongo_conn()
             daisho_help.usage()
-            self.daisho_prompt()
+            daisho_prompt.shell()
             daisho_logger.info("Started Daisho prompt.")
 
         else:
@@ -99,111 +93,8 @@ class Daisho(object):
             # Check if we are able to connect to MongoDB.
             daisho_db.mongo_conn()
             daisho_help.usage()
-            self.daisho_prompt()
+            daisho_prompt.usage()
             logging.info("Started Daisho prompt.")
-
-    def daisho_prompt(self):
-        """
-        Daisho's prompt.
-        """
-        cmd_list = ["add", "del", "list", "find", "edit", "open", "help", "quit"]
-        keyword_completer = WordCompleter(cmd_list, ignore_case=True)
-
-        while True:
-            daisho_prompt = prompt(
-                "daisho ->> ",
-                history=FileHistory(HISTORY),
-                auto_suggest=AutoSuggestFromHistory(),
-                completer=keyword_completer,
-            )
-            # Split the input to a list
-            values = [i for i in daisho_prompt.split()]
-            key_word = values[0].lower()
-
-            if key_word in cmd_list:
-                # Case 1: key_word is `help` / `quit` / `list`
-                # `help` and `quit` are cases where a single arg is valid.
-                # `list` without args should list all tasks and notes [Feature]
-                if len(values) == 1:
-                    if key_word == "help":
-                        self.daisho_help()
-                    elif key_word == "quit":
-                        sys.exit("\nExiting Daisho.\n")
-                    elif key_word == "list":
-                        self.list_tasks(criteria="all")
-                    else:
-                        self.daisho_help()
-                        self.daisho_prompt()
-
-                elif len(values) > 1:
-                    # Case 2: key_word is "add"
-                    if key_word == "add":
-                        add_args = ["note", "task"]
-                        if values[1].lower() in add_args:
-                            daisho_add.add_prompt(job_type=values[1].lower())
-                            self.daisho_prompt()
-                        else:
-                            print(daisho_add.add_prompt.__doc__)
-                            self.daisho_prompt()
-
-                    # Case 3: key_word is "list"
-                    if key_word == "list":
-                        list_args = ["all", "today", "tags", "prio", "trash"]
-                        if values[1].lower() in list_args:
-                            self.list_tasks(criteria=values[1].lower())
-                        else:
-                            print(self.list_tasks.__doc__)
-                            self.daisho_prompt()
-
-                    # Case 4: key_word is "edit"
-                    if key_word == "edit":
-                        edit_args = ["task", "note"]
-                        if values[1].lower() in edit_args:
-                            try:
-                                if values[2]:
-                                    try:
-                                        job_type, num = (
-                                            values[1].lower(),
-                                            int(values[2]),
-                                        )
-                                        self.edit_jobs(job_type=job_type, number=num)
-                                    except ValueError:
-                                        print(self.edit_jobs.__doc__)
-                                        self.daisho_prompt()
-                            except IndexError:
-                                print(self.edit_jobs.__doc__)
-                                self.daisho_prompt()
-                        else:
-                            # print("`edit` takes either `task` or `note` as argument.")
-                            print(self.edit_jobs.__doc__)
-                            self.daisho_prompt()
-
-                    # Case 5: key_word is "open"
-                    if key_word == "open":
-                        open_args = ["task", "note"]
-                        if values[1].lower() in open_args:
-                            try:
-                                if values[2]:
-                                    try:
-                                        job_type, num = (
-                                            values[1].lower(),
-                                            int(values[2]),
-                                        )
-                                        self.open_jobs(job_type=job_type, number=num)
-                                    except ValueError:
-                                        print(self.open_jobs.__doc__)
-                                        self.daisho_prompt()
-                            except IndexError:
-                                print(self.open_jobs.__doc__)
-                                self.daisho_prompt()
-                        else:
-                            # print("`edit` takes either `task` or `note` as argument.")
-                            print(self.open_jobs.__doc__)
-                            self.daisho_prompt()
-
-            else:
-                # if values[0].lower() not in list
-                self.daisho_help()
 
     def list_tasks(self, criteria=None):
         """
