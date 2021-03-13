@@ -45,13 +45,13 @@ ADD_HISTORY = DAISHO_HOME + "add_cmd.txt"
 
 def add_prompt(job_type=None):
     """
-`add` accepts the following arguments.
-    * task
-    * note
+    `add` accepts the following arguments.
+        * task
+        * note
 
-Example:
-    ->> add task # To add a task to Daisho.
-    ->> add note # To add a note to Daisho.
+    Example:
+        ->> add task # To add a task to Daisho.
+        ->> add note # To add a note to Daisho.
     """
     if job_type == "task":
         task_fields = {"Subject": "", "Date": "", "Tags": [], "Priority": ""}

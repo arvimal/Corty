@@ -4,3 +4,4 @@ prompt_toolkit
 pygments
 pymongo
 graphene
+graphene-pydantic

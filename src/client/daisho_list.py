@@ -45,7 +45,7 @@ from client import daisho_db
 def list_all(val="all"):
     if val == "today":
         pass
-        #daisho_db.sys(search.today)
+        # daisho_db.sys(search.today)
     elif val == "tomorrow":
         pass
-        #daisho_db.sys(search.tomorrow)
+        # daisho_db.sys(search.tomorrow)
