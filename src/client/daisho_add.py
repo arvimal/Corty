@@ -35,7 +35,7 @@ from prompt_toolkit import prompt
 from prompt_toolkit.completion import WordCompleter
 from prompt_toolkit.history import FileHistory
 
-from daisho.daisho_db import mongo_add_note, mongo_add_task, mongo_conn
+from client import daisho_db
 
 logger = logging.getLogger(__name__)
 HOME = os.getenv("HOME")
@@ -61,7 +61,7 @@ Example:
                 "{:>10} : ".format(key), history=FileHistory(ADD_HISTORY)
             )
         print()
-        add_task(task_fields)
+        daisho_db.add_task(task_fields)
 
     elif job_type == "note":
         note_fields = {
@@ -77,7 +77,7 @@ Example:
                 "{:>10} : ".format(key), history=FileHistory(ADD_HISTORY)
             )
         print()
-        add_note(note_fields)
+        daisho_db.add_note(note_fields)
     # Process the dict `fields` before sending to
     # mongodb via add_data()
     else:
@@ -91,7 +91,6 @@ def add_task(task_dict):
     """
     print(task_dict)
     print("Adding your task to the database!")
-    mongo_add_task(task_dict)
 
 
 def add_note(note_dict):
@@ -102,7 +101,6 @@ def add_note(note_dict):
     pprint.pprint(note_dict)
     # Cleanup: Remove print() and set logger here.
     print("Adding your note to the database!")
-    mongo_add_note(note_dict)
 
 
 def edit_prompt(job_type=None, element_number=None):

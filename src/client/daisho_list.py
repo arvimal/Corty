@@ -39,12 +39,13 @@ This also takes care on opening tasks which has active sub-tasks,
 as well as notes in the pre-configured editor of your choice.
 """
 
-from daisho import daisho_db
+from client import daisho_db
 
 
 def list_all(val="all"):
-
-    if val="today":
-        daisho_db.sys(search.today)
-    elif val="tomorrow":
-        daisho_db.sys(search.tomorrow)
+    if val == "today":
+        pass
+        #daisho_db.sys(search.today)
+    elif val == "tomorrow":
+        pass
+        #daisho_db.sys(search.tomorrow)
