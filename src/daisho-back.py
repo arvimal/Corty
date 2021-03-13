@@ -40,10 +40,9 @@ from pygments.token import Token
 from client import daisho_add
 from client import daisho_db
 from client import daisho_list
-from client import daisho_help
 
 if sys.version[0] != "3":
-    print("\nDaisho requires Python v3")
+    print("\nDaisho requires Python v3.")
     print("Exiting!\n")
     sys.exit(1)
 
@@ -67,7 +66,7 @@ class Daisho(object):
             print("\n\t- Welcome to Daisho -\n")
             # Check if we are able to connect to MongoDB.
             daisho_db.mongo_conn()
-            daisho_help.usage()
+            self.daisho_help()
             self.daisho_prompt()
             daisho_logger.info("Started Daisho prompt.")
 
@@ -98,15 +97,31 @@ class Daisho(object):
             logging.info("#### Daisho starting up ####")
             # Check if we are able to connect to MongoDB.
             daisho_db.mongo_conn()
-            daisho_help.usage()
+            self.daisho_help()
             self.daisho_prompt()
             logging.info("Started Daisho prompt.")
+
+    def daisho_help(self):
+        """
+        Daisho's Usage
+        """
+        print("\nUsage:")
+        print("1. add  [note] | [task]            - Add a new note or task.")
+        print("2. list [day]  | [all] | [pending] - List to-dos for the day.")
+        print("3. edit [note] | [task]  <number>  - Edit a note or task ")
+        print("4. open [note] | [task]  <number>  - Open a note or task for more info")
+        print("5. rm   [note] | [task]  <number>  - Remove a note / task.")
+        print("6. del  [note] | [task]  <number>  - Delete a note / task permanently.")
+        print("7. search <keyword>                - Search for a keyword.\n")
+        print(" *  help                           - Prints this help message.")
+        print(" *  quit                           - Quits Daisho. \n")
+        pass
 
     def daisho_prompt(self):
         """
         Daisho's prompt.
         """
-        cmd_list = ["add", "del", "list", "find", "edit", "open", "help", "quit"]
+        cmd_list = ["add", "list", "search", "edit", "open", "rm", "del" "help", "quit"]
         keyword_completer = WordCompleter(cmd_list, ignore_case=True)
 
         while True:

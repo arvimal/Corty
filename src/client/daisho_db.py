@@ -55,7 +55,7 @@ def mongo_conn():
     return daisho_db
 
 
-def mongo_add_task(task_dict):
+def add_task(task_dict):
     """
     We conect to MongoDB here,
     to add our tasks
@@ -65,7 +65,7 @@ def mongo_add_task(task_dict):
     pass
 
 
-def mongo_add_note(note_dict):
+def add_note(note_dict):
     """
     We conect to mongodb here,
     to add our notes
