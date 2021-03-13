@@ -3,3 +3,4 @@ uvicorn
 prompt_toolkit
 pygments
 pymongo
+graphene
