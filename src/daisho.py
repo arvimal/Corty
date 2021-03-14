@@ -96,7 +96,7 @@ class Daisho(object):
             daisho_prompt.usage()
             logging.info("Started Daisho prompt.")
 
-    def list_tasks(self, criteria=None):
+    def list_tasks(self, criteria: str):
         """
         `list` accepts the following arguments:
             * all
@@ -107,9 +107,9 @@ class Daisho(object):
             * trash
         """
         print("List called with argument `{}`".format(criteria))
-        pass
+        daisho_list.list_tasks(criteria)
 
-    def search_tasks(self, *args):
+    def search_tasks(self, *args: list):
         """
         `search` accepts a keyword, to search.
 
@@ -118,7 +118,7 @@ class Daisho(object):
         print(self.search_tasks.__doc__)
         pass
 
-    def edit_jobs(self, job_type, number):
+    def edit_jobs(self, job_type: str, number: int):
         """
         `edit` accepts the following arguments, and a number.
             * note
@@ -130,7 +130,7 @@ class Daisho(object):
         """
         print("\nEditing {}: #{}\n".format(job_type, number))
 
-    def open_jobs(self, job_type, number):
+    def open_jobs(self, job_type: str, number: int):
         """
         `open` accepts the following arguments, and a number.
             * note
