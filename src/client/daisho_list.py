@@ -42,7 +42,7 @@ as well as notes in the pre-configured editor of your choice.
 from client import daisho_db
 
 
-def list_tasks(val="all"):
+def list_tasks(val: str="all"):
     if val == "today":
         pass
         # daisho_db.sys(search.today)
