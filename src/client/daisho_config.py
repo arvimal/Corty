@@ -5,9 +5,9 @@ import logging
 import os
 import pathlib
 
-import daisho_db
-import daisho_cli
-import daisho_help
+from server import daisho_db
+
+from client import daisho_cli, daisho_help
 
 HOME = os.getenv("HOME")
 DAISHO_HOME = HOME + "/.config/daisho/"
