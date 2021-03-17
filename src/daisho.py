@@ -30,6 +30,7 @@ import sys
 
 # Workaround to set the `src` folder in PYTHONPATH
 # to import `client` and subsequent functions
+# Required, in pythonv3
 cur_dir = os.path.dirname(os.path.realpath(__file__))
 par_dir = os.path.dirname(cur_dir)
 sys.path.append(par_dir)
@@ -51,7 +52,7 @@ daisho_logger = logging.getLogger(__name__)
 
 
 class Daisho(object):
-    """Daisho's main class: Testing"""
+    """Daisho's main class"""
 
     def __init__(self):
         # Check existence of CONFIG
@@ -62,7 +63,6 @@ class Daisho(object):
             print("\n\t- Welcome to Daisho -\n")
             # Check if we are able to connect to MongoDB.
             daisho_db.mongo_conn()
-            # daisho_help.usage()
             daisho_cli.shell()
             daisho_logger.info("Started Daisho prompt.")
 

@@ -8,8 +8,9 @@ from prompt_toolkit import prompt
 from prompt_toolkit.auto_suggest import AutoSuggestFromHistory
 from prompt_toolkit.completion import WordCompleter
 from prompt_toolkit.history import FileHistory
-#from prompt_toolkit.shortcuts import ProgressBar
-#from pygments.token import Token
+
+# from prompt_toolkit.shortcuts import ProgressBar
+# from pygments.token import Token
 
 from client import daisho_help, daisho_list, daisho_add
 
