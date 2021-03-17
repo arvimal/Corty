@@ -43,7 +43,7 @@ DAISHO_HOME = HOME + "/.config/daisho/"
 ADD_HISTORY = DAISHO_HOME + "add_cmd.txt"
 
 
-def add_prompt(job_type: str=None):
+def add_prompt(job_type: str = None):
     """
     `add` accepts the following arguments.
         * task

@@ -28,7 +28,7 @@ It inturn calls the del and rm functions in daisho_db.py
 """
 
 
-def task_del(num: int=None):
+def task_del(num: int = None):
     """
     Delete tasks based on number
     """
