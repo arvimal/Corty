@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
-import os
 import logging
+import os
 import sys
 
 from prompt_toolkit import prompt
@@ -11,8 +11,7 @@ from prompt_toolkit.history import FileHistory
 from prompt_toolkit.shortcuts import ProgressBar
 from pygments.token import Token
 
-from client import daisho_help
-from client import daisho_list
+from client import daisho_help, daisho_list, daisho_add
 
 HOME = os.getenv("HOME")
 DAISHO_HOME = HOME + "/.config/daisho/"
@@ -70,7 +69,7 @@ def shell():
                 if key_word == "list":
                     list_args = ["all", "today", "tags", "prio", "trash"]
                     if values[1].lower() in list_args:
-                        daisho_list.list_tasks(criteria=values[1].lower())
+                        daisho_list.list_tasks(val=values[1].lower())
                     else:
                         print(daisho_list.list_tasks.__doc__)
                         shell()

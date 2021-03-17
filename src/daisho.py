@@ -23,18 +23,19 @@
 # SOFTWARE.
 
 import configparser
-import datetime
 import logging
 import os
 import pathlib
 import sys
-import time
 
-from client import daisho_add
-from client import daisho_db
-from client import daisho_list
-from client import daisho_help
-from client import daisho_prompt
+# Workaround to set the `src` folder in PYTHONPATH
+# to import `client` and subsequent functions
+cur_dir = os.path.dirname(os.path.realpath(__file__))
+par_dir = os.path.dirname(cur_dir)
+sys.path.append(par_dir)
+
+from client import daisho_cli, daisho_help
+from server import daisho_db
 
 if sys.version[0] != "3":
     print("\nDaisho requires Python v3")
@@ -61,8 +62,8 @@ class Daisho(object):
             print("\n\t- Welcome to Daisho -\n")
             # Check if we are able to connect to MongoDB.
             daisho_db.mongo_conn()
-            daisho_help.usage()
-            daisho_prompt.shell()
+            # daisho_help.usage()
+            daisho_cli.shell()
             daisho_logger.info("Started Daisho prompt.")
 
         else:
@@ -93,54 +94,8 @@ class Daisho(object):
             # Check if we are able to connect to MongoDB.
             daisho_db.mongo_conn()
             daisho_help.usage()
-            daisho_prompt.usage()
+            daisho_cli.usage()
             logging.info("Started Daisho prompt.")
-
-    def list_tasks(self, criteria: str):
-        """
-        `list` accepts the following arguments:
-            * all
-            * today
-            * date, in `DD-MM-YYYY` format
-            * tags
-            * prio
-            * trash
-        """
-        print("List called with argument `{}`".format(criteria))
-        daisho_list.list_tasks(criteria)
-
-    def search_tasks(self, *args: list):
-        """
-        `search` accepts a keyword, to search.
-
-        It returns the notes / tasks which contain the keyword.
-        """
-        print(self.search_tasks.__doc__)
-        pass
-
-    def edit_jobs(self, job_type: str, number: int):
-        """
-        `edit` accepts the following arguments, and a number.
-            * note
-            * task
-
-        Example:
-            ->> edit note 4 # To edit the 4th note in the list.
-            ->> edit task 3 # To edit the 5th task in the list.
-        """
-        print("\nEditing {}: #{}\n".format(job_type, number))
-
-    def open_jobs(self, job_type: str, number: int):
-        """
-        `open` accepts the following arguments, and a number.
-            * note
-            * task
-
-        Example:
-            ->> open note 4 # To open the 4th note in the list.
-            ->> open task 3 # To open the 5th task in the list.
-        """
-        print("\nEditing {}: #{}\n".format(job_type, number))
 
 
 if __name__ == "__main__":

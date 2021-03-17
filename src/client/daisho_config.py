@@ -1,8 +1,13 @@
 #!/usr/bin/env python3
 
-import pathlib
 import configparser
 import logging
+import os
+import pathlib
+
+import daisho_cli
+import daisho_db
+import daisho_help
 
 HOME = os.getenv("HOME")
 DAISHO_HOME = HOME + "/.config/daisho/"
@@ -21,7 +26,7 @@ def generate_config():
         # Check if we are able to connect to MongoDB.
         daisho_db.mongo_conn()
         daisho_help.usage()
-        daisho_prompt.shell()
+        daisho_cli.shell()
         daisho_logger.info("Started Daisho prompt.")
 
     else:
@@ -52,5 +57,5 @@ def generate_config():
         # Check if we are able to connect to MongoDB.
         daisho_db.mongo_conn()
         daisho_help.usage()
-        daisho_prompt.usage()
+        daisho_cli.usage()
         logging.info("Started Daisho prompt.")
