@@ -8,8 +8,8 @@ from prompt_toolkit import prompt
 from prompt_toolkit.auto_suggest import AutoSuggestFromHistory
 from prompt_toolkit.completion import WordCompleter
 from prompt_toolkit.history import FileHistory
-from prompt_toolkit.shortcuts import ProgressBar
-from pygments.token import Token
+#from prompt_toolkit.shortcuts import ProgressBar
+#from pygments.token import Token
 
 from client import daisho_help, daisho_list, daisho_add
 
@@ -85,12 +85,12 @@ def shell():
                                         values[1].lower(),
                                         int(values[2]),
                                     )
-                                    self.edit_jobs(job_type=job_type, number=num)
+                                    edit_jobs(job_type=job_type, number=num)
                                 except ValueError:
-                                    print(self.edit_jobs.__doc__)
+                                    print(edit_jobs.__doc__)
                                     shell()
                         except IndexError:
-                            print(self.edit_jobs.__doc__)
+                            print(edit_jobs.__doc__)
                             shell()
                     else:
                         # print("`edit` takes either `task` or `note` as argument.")
