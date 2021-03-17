@@ -1,8 +1,0 @@
-fastapi
-uvicorn
-prompt_toolkit
-pygments
-pymongo
-graphene
-graphene-pydantic
-
