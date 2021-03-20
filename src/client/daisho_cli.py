@@ -12,7 +12,7 @@ from prompt_toolkit.history import FileHistory
 # from prompt_toolkit.shortcuts import ProgressBar
 # from pygments.token import Token
 
-from client import daisho_help, daisho_list, daisho_add
+from .client import daisho_help, daisho_list, daisho_add
 
 HOME = os.getenv("HOME")
 DAISHO_HOME = HOME + "/.config/daisho/"

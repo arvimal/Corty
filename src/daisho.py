@@ -33,6 +33,7 @@ import sys
 # Required, in pythonv3
 cur_dir = os.path.dirname(os.path.realpath(__file__))
 par_dir = os.path.dirname(cur_dir)
+print(par_dir)
 sys.path.append(par_dir)
 
 from client import daisho_cli, daisho_config
