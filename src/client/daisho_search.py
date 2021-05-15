@@ -29,12 +29,12 @@ patterns and regular expressions.
 
 import logging
 
-from daisho import daisho_db
+import daisho_db
 
 logger = logging.getLogger(__name__)
 
 
-def get_data(table, query):
+def get_data(table, query: str):
     """
     Query the db and return data
     """

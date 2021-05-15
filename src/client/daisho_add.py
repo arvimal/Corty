@@ -35,7 +35,7 @@ from prompt_toolkit import prompt
 from prompt_toolkit.completion import WordCompleter
 from prompt_toolkit.history import FileHistory
 
-from client import daisho_db
+from src.server import daisho_db
 
 logger = logging.getLogger(__name__)
 HOME = os.getenv("HOME")
@@ -43,7 +43,7 @@ DAISHO_HOME = HOME + "/.config/daisho/"
 ADD_HISTORY = DAISHO_HOME + "add_cmd.txt"
 
 
-def add_prompt(job_type=None):
+def add_prompt(job_type: str = None):
     """
     `add` accepts the following arguments.
         * task

@@ -28,12 +28,9 @@ It inturn calls the del and rm functions in daisho_db.py
 """
 
 
-def task_del(num):
-    """
-    Delete tasks based on number
-    """
-    try:
-        import daisho
-        import daisho_add
-    except ImportError as e:
-        print(e)
+class helpers:
+    def task_del(num: int = None):
+        """
+        Delete tasks based on number
+        """
+        pass

@@ -1,19 +1,11 @@
-# Upcoming features
-
-1. Tunables in YAML format
-    * Tags
-    * Priority
-
-2.
-
-
 # To-Do
+1. Logging:
+    * Separate logging for server and client
 
-1. Heartbeat check to MongoDB service
+2. Connectivity checks:
+    * Check from client to server\
+    * Check from server to MongoDB (Do not accept I/O if this fails)
 
 
-# Enhancements
-
-1. Make daisho start the mongodb service
 
 # Bug fixes
