@@ -36,7 +36,8 @@ par_dir = os.path.dirname(cur_dir)
 print(par_dir)
 sys.path.append(par_dir)
 
-from client import daisho_cli, daisho_config
+from client import daisho_cli
+from helpers import daisho_config
 from server import daisho_db
 
 if sys.version[0] != "3":

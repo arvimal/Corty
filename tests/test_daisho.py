@@ -1,4 +1,4 @@
-from ..src import __version__
+from daisho import __version__
 
 
 def test_version():
