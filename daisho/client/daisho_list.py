@@ -39,7 +39,7 @@ This also takes care on opening tasks which has active sub-tasks,
 as well as notes in the pre-configured editor of your choice.
 """
 
-from server import daisho_db
+from daisho.server import daisho_db
 
 
 def list_tasks(val: str = "all"):

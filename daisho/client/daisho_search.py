@@ -29,7 +29,7 @@ patterns and regular expressions.
 
 import logging
 
-import daisho_db
+from daisho.server import daisho_db
 
 logger = logging.getLogger(__name__)
 

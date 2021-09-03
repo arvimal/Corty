@@ -4,13 +4,13 @@ import logging
 import os
 import sys
 
-from helpers import daisho_help
+from daisho.helpers import daisho_help
 from prompt_toolkit import prompt
 from prompt_toolkit.auto_suggest import AutoSuggestFromHistory
 from prompt_toolkit.completion import WordCompleter
 from prompt_toolkit.history import FileHistory
 
-from client import daisho_add, daisho_list
+from daisho.client import daisho_add, daisho_list
 
 # from prompt_toolkit.shortcuts import ProgressBar
 # from pygments.token import Token

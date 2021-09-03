@@ -29,7 +29,10 @@ It inturn calls the del and rm functions in daisho_db.py
 
 
 class helpers:
-    def task_del(num: int = None):
+    def __init__(self):
+        pass
+
+    def task_del(self, num: int = None):
         """
         Delete tasks based on number
         """
