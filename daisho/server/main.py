@@ -4,7 +4,7 @@ import graphene
 from fastapi import FastAPI
 from starlette.graphql import GraphQLApp
 
-from schema import Query
+from .schema import Query
 
 app = FastAPI(
     title="Daisho API", description="Daisho GraphQL FastAPI interface", version="0.1"
