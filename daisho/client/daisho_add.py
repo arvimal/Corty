@@ -36,6 +36,8 @@ from prompt_toolkit import prompt
 from prompt_toolkit.completion import WordCompleter
 from prompt_toolkit.history import FileHistory
 
+from server import daisho_db
+
 logger = logging.getLogger(__name__)
 HOME = os.getenv("HOME")
 DAISHO_HOME = HOME + "/.config/daisho/"
