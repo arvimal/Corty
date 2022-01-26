@@ -12,8 +12,8 @@ uvicorn = "^0.13.4"
 prompt-toolkit = "^3.0.17"
 Pygments = "^2.8.1"
 pymongo = "^3.11.3"
-graphene = "^2.1.8"
 pydantic = "^1.8.1"
+strawberry-graphql = "^0.92.1"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2.4"

@@ -36,9 +36,9 @@ par_dir = os.path.dirname(cur_dir)
 print(par_dir)
 sys.path.append(par_dir)
 
-from daisho.client import daisho_cli
-from daisho.helpers import daisho_config
-from daisho.server import daisho_db
+from client import daisho_cli
+from helpers import daisho_config
+from server import daisho_db
 
 if sys.version[0] != "3":
     print("\nDaisho requires Python v3")

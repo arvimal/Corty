@@ -4,10 +4,11 @@ import configparser
 import logging
 import os
 import pathlib
+from types import GeneratorType
 
-from daisho.client import daisho_cli
-from daisho.helpers import daisho_help
-from daisho.server import daisho_db
+from client import daisho_cli
+from helpers import daisho_help
+from server import daisho_db
 
 HOME = os.getenv("HOME")
 DAISHO_HOME = HOME + "/.config/daisho/"
