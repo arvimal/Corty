@@ -9,7 +9,7 @@ import logging
 import os
 import pprint
 
-from corty.server import daisho_db
+from corty.db import db_connector
 from prompt_toolkit import prompt
 from prompt_toolkit.completion import WordCompleter
 from prompt_toolkit.history import FileHistory

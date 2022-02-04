@@ -1,22 +1,20 @@
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
-## Daisho - A CLI todo manager
+## Corty
 
 ### 1. Introduction
 
-[Daisho](https://en.wikipedia.org/wiki/Daish%C5%8D), means `big-little`.
-
-The development of Daisho has been mainly in Fedora Linux.
+The development of Corty has been mainly in Fedora Linux.
 
 It aims to be simple, and easy to use. It is a CLI application, and supports command auto-completion, colour-coded outputs etc.
 
-### 2. How does Daisho work?
+### 2. How does Corty work?
 
-Daisho has a client-server architecture that communicates through a GraphQL API interface. 
+Corty has a client-server architecture that communicates through a GraphQL API interface. 
 
-The user interacts with the server through the daisho CLI, which is a [REPL](https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop) interface that waits for user input.
+The user interacts with the server through the Corty CLI, which is a [REPL](https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop) interface that waits for user input.
 
-A help is printed each time `Daisho` starts. This helps the user with a quick overview of the primary commands available.  
+A help is printed each time `Corty` starts. This helps the user with a quick overview of the primary commands available.  
 
 Command auto-completion is supported, and a TAB press cycles through each primary. The `Enter` key selects the command. Once the primary command is selected, a second TAB lists the secondary level of commands specific to the selected primary. 
 
@@ -24,7 +22,7 @@ The server uses MongoDB as its database backend. While starting up, the client e
 
 ### 3. Installation
 
-**Daisho** requires the following packages.
+**Corty** requires the following packages.
 
    1. MongoDB
    2. python3-colorama

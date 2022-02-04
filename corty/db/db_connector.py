@@ -17,6 +17,7 @@ def mongo_conn():
     Create the local db `daisho`, if it doesn't exist
     """
     try:
+        print("Connecting to MongoDB...")
         connect = pymongo.MongoClient(HOST + ":" + PORT)
         # Connect to the `daisho` db (will create if non-existing)
         daisho_db = connect.daisho
