@@ -14,4 +14,3 @@ def usage():
     print("6. find <keyword>                  - Search for a keyword.\n")
     print(" *  help                           - Prints this help message.")
     print(" *  quit                           - Quits Daisho. \n")
-    pass

@@ -1,4 +1,4 @@
-from daisho import __version__
+from corty import __version__
 
 
 def test_version():

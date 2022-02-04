@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 
-import graphene
 from fastapi import FastAPI
 from starlette.graphql import GraphQLApp
+from helpers import logger
+import graphene
 
 from .schema import Query
 

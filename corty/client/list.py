@@ -39,7 +39,7 @@ This also takes care on opening tasks which has active sub-tasks,
 as well as notes in the pre-configured editor of your choice.
 """
 
-from daisho.server import daisho_db
+from corty.server import daisho_db
 
 
 def list_tasks(val: str = "all"):
@@ -57,14 +57,11 @@ def list_tasks(val: str = "all"):
     # TODO: Initial implementation only carries `all`, `today`, `date`
     if val == "today":
         print("Listing today's tasks")
-        pass
-        # daisho_db.sys(search.today)
+            # daisho_db.sys(search.today)
     elif val == "all":
         print("Listing all tasks")
-        pass
-        # daisho_db.sys(search.tomorrow)
+            # daisho_db.sys(search.tomorrow)
     elif val == "prio":
         print("Listing tasks sorted on priority")
-        pass
     elif val == "tags":
         print("Listing tasks based on tags")

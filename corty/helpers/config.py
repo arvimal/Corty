@@ -5,9 +5,9 @@ import logging
 import os
 import pathlib
 
-from daisho.client import daisho_cli
-from daisho.helpers import daisho_help
-from daisho.server import daisho_db
+from corty.client import daisho_cli
+from corty.helpers import daisho_help
+from corty.server import daisho_db
 
 HOME = os.getenv("HOME")
 DAISHO_HOME = HOME + "/.config/daisho/"
