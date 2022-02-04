@@ -32,9 +32,7 @@ daisho_logger = logging.getLogger(__name__)
 
 
 class main(object):
-    """
-    
-    """
+    """ """
 
     def __init__(self):
         # Check existence of CONFIG

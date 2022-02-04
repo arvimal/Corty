@@ -57,10 +57,10 @@ def list_tasks(val: str = "all"):
     # TODO: Initial implementation only carries `all`, `today`, `date`
     if val == "today":
         print("Listing today's tasks")
-            # daisho_db.sys(search.today)
+        # daisho_db.sys(search.today)
     elif val == "all":
         print("Listing all tasks")
-            # daisho_db.sys(search.tomorrow)
+        # daisho_db.sys(search.tomorrow)
     elif val == "prio":
         print("Listing tasks sorted on priority")
     elif val == "tags":
