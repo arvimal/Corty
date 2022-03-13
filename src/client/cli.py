@@ -4,42 +4,42 @@ import logging
 import os
 import sys
 
-from corty.helpers import daisho_help
+from helpers import help
 from prompt_toolkit import prompt
 from prompt_toolkit.auto_suggest import AutoSuggestFromHistory
 from prompt_toolkit.completion import WordCompleter
 from prompt_toolkit.history import FileHistory
 
-from corty.client import daisho_add, daisho_list
+from client import add, list
 
 # from prompt_toolkit.shortcuts import ProgressBar
 # from pygments.token import Token
 
 
 HOME = os.getenv("HOME")
-DAISHO_HOME = HOME + "/.config/daisho/"
-CONFIG = DAISHO_HOME + "daisho.conf"
-HISTORY = DAISHO_HOME + "history.txt"
-LOG_FILE = DAISHO_HOME + "daisho.log"
-daisho_logger = logging.getLogger(__name__)
+DAISHO_HOME = f"{HOME}/.config/corty/"
+CONFIG = f"{DAISHO_HOME}corty.conf"
+HISTORY = f"{DAISHO_HOME}history.txt"
+LOG_FILE = f"{DAISHO_HOME}corty.log"
+corty_logger = logging.getLogger(__name__)
 
 
 def shell():
     """
-    Daisho's prompt.
+    Corty's prompt.
     """
     cmd_list = ["add", "del", "list", "find", "edit", "open", "help", "quit"]
     keyword_completer = WordCompleter(cmd_list, ignore_case=True)
 
     while True:
-        daisho_prompt = prompt(
-            "daisho ->> ",
+        corty_prompt = prompt(
+            "corty ->> ",
             history=FileHistory(HISTORY),
             auto_suggest=AutoSuggestFromHistory(),
             completer=keyword_completer,
         )
         # Split the input to a list
-        values = [i for i in daisho_prompt.split()]
+        values = list(corty_prompt.split())
         key_word = values[0].lower()
 
         if key_word in cmd_list:
@@ -48,13 +48,13 @@ def shell():
             # `list` without args should list all tasks and notes [Feature]
             if len(values) == 1:
                 if key_word == "help":
-                    daisho_help.usage()
+                    help.usage()
                 elif key_word == "quit":
-                    sys.exit("\nExiting Daisho.\n")
+                    sys.exit("\nExiting Corty.\n")
                 elif key_word == "list":
-                    daisho_list.list_tasks(val="all")
+                    list.list_tasks(val="all")
                 else:
-                    daisho_help.usage()
+                    help.usage()
                     shell()
 
             elif len(values) > 1:
@@ -62,19 +62,19 @@ def shell():
                 if key_word == "add":
                     add_args = ["note", "task"]
                     if values[1].lower() in add_args:
-                        daisho_add.add_prompt(job_type=values[1].lower())
-                        daisho_help.usage()
+                        add.add_prompt(job_type=values[1].lower())
+                        help.usage()
                     else:
-                        print(daisho_add.add_prompt.__doc__)
+                        print(add.add_prompt.__doc__)
                         shell()
 
                 # Case 3: key_word is "list"
                 if key_word == "list":
                     list_args = ["all", "today", "tags", "prio", "trash"]
                     if values[1].lower() in list_args:
-                        daisho_list.list_tasks(val=values[1].lower())
+                        list.list_tasks(val=values[1].lower())
                     else:
-                        print(daisho_list.list_tasks.__doc__)
+                        print(list.list_tasks.__doc__)
                         shell()
 
                 # Case 4: key_word is "edit"
@@ -125,4 +125,4 @@ def shell():
 
         else:
             # if values[0].lower() not in list
-            daisho_help.usage()
+            corty_help.usage()

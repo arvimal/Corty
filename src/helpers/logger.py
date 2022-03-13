@@ -4,13 +4,13 @@ import logging
 import os
 
 HOME = os.getenv("HOME")
-DAISHO_HOME = HOME + "/.config/daisho/"
-LOG_FILE = DAISHO_HOME + "daisho.log"
+DAISHO_HOME = f'{HOME}/.config/corty/'
+LOG_FILE = f'{DAISHO_HOME}corty.log'
 
 
-class Daisho_Logger:
+class Corty_Logger:
     """
-    Daisho's custom logger
+    Corty's custom logger
     """
 
     logging.basicConfig(
@@ -19,4 +19,4 @@ class Daisho_Logger:
         filename=LOG_FILE,
         level=logging.INFO,
     )
-    daisho_logger = logging.getLogger("_daisho_")
+    corty_logger = logging.getLogger("_corty_")

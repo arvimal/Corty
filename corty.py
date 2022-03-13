@@ -14,9 +14,9 @@ par_dir = os.path.dirname(cur_dir)
 print(par_dir)
 sys.path.append(par_dir)
 
-from client import cli
-from helpers import config, help, logger
-from server import db
+from src.client import cli
+from src.db import db_connector
+from src.helpers import config, logger
 
 if sys.version[0] != "3":
     print("\Requires Python v3")
@@ -24,11 +24,11 @@ if sys.version[0] != "3":
     sys.exit(1)
 
 HOME = os.getenv("HOME")
-CORTY_HOME = HOME + "/.config/corty/"
-CONFIG = CORTY_HOME + "corty.conf"
-HISTORY = CORTY_HOME + "history.txt"
-LOG_FILE = CORTY_HOME + "daisho.log"
-daisho_logger = logging.getLogger(__name__)
+CORTY_HOME = f'{HOME}/.config/corty/'
+CONFIG = f'{CORTY_HOME}corty.conf'
+HISTORY = f'{CORTY_HOME}history.txt'
+LOG_FILE = f'{CORTY_HOME}corty.log'
+corty_logger = logging.getLogger(__name__)
 
 
 class main(object):
@@ -37,17 +37,17 @@ class main(object):
     def __init__(self):
         # Check existence of CONFIG
         if all([pathlib.Path(CONFIG).exists()]):
-            daisho_logger.info(
-                "{} exists, Welcome to Daisho".format(pathlib.Path(CONFIG))
+            corty_logger.info(
+                "{} exists, Welcome to Corty".format(pathlib.Path(CONFIG))
             )
-            print("\n\t- Welcome to Daisho -\n")
+            print("\n\t- Welcome to Corty -\n")
             # Check if we are able to connect to MongoDB.
-            daisho_db.mongo_conn()
-            daisho_cli.shell()
-            daisho_logger.info("Started Daisho prompt.")
+            db_connector.mongo_conn()
+            cli.shell()
+            logger.info("Started Corty prompt.")
 
         else:
-            daisho_config.generate_config()
+            config.generate_config()
 
 
 if __name__ == "__main__":

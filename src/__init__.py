@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-"""Top-level package for Daisho."""
+"""Top-level package for Corty."""
 
 __author__ = """Vimal A.R"""
 __email__ = "arvimal81@gmail.com"

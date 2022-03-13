@@ -23,7 +23,7 @@
 # SOFTWARE.
 
 """
-daisho_list handles listing the tasks and notes, based on filters.
+corty_list handles listing the tasks and notes, based on filters.
 
 `filters` are any one of the following:
 
@@ -39,7 +39,7 @@ This also takes care on opening tasks which has active sub-tasks,
 as well as notes in the pre-configured editor of your choice.
 """
 
-from corty.server import daisho_db
+from db import db_connector
 
 
 def list_tasks(val: str = "all"):
@@ -57,10 +57,10 @@ def list_tasks(val: str = "all"):
     # TODO: Initial implementation only carries `all`, `today`, `date`
     if val == "today":
         print("Listing today's tasks")
-        # daisho_db.sys(search.today)
+        # corty_db.sys(search.today)
     elif val == "all":
         print("Listing all tasks")
-        # daisho_db.sys(search.tomorrow)
+        # corty_db.sys(search.tomorrow)
     elif val == "prio":
         print("Listing tasks sorted on priority")
     elif val == "tags":

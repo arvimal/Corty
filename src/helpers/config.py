@@ -5,31 +5,31 @@ import logging
 import os
 import pathlib
 
-from corty.client import daisho_cli
-from corty.helpers import daisho_help
-from corty.server import daisho_db
+from client import cli
+from helpers import help
+from db import db_connector
 
 HOME = os.getenv("HOME")
-DAISHO_HOME = HOME + "/.config/daisho/"
-CONFIG = DAISHO_HOME + "daisho.conf"
-HISTORY = DAISHO_HOME + "history.txt"
-LOG_FILE = DAISHO_HOME + "daisho.log"
+DAISHO_HOME = f'{HOME}/.config/corty/'
+CONFIG = f'{DAISHO_HOME}corty.conf'
+HISTORY = f'{DAISHO_HOME}history.txt'
+LOG_FILE = f'{DAISHO_HOME}corty.log'
 
-daisho_logger = logging.getLogger(__name__)
+corty_logger = logging.getLogger(__name__)
 
 
 def generate_config():
     # Check existence of CONFIG
-    print("\n\t- Welcome to Daisho -\n")
+    print("\n\t- Welcome to Corty -\n")
     print("Initial setup:")
-    print("\tCreating Daisho's configurations")
+    print("\tCreating Corty's configurations")
 
     # Create HOME, CONFIG, HISTORY, and LOG_FILE
     pathlib.Path(DAISHO_HOME).mkdir()
     pathlib.Path(CONFIG).touch(exist_ok=True)
     pathlib.Path(HISTORY).touch(exist_ok=True)
     # pathlib.Path(LOG_FILE).touch(exist_ok=True)
-    # Write Daisho's configuration file
+    # Write Corty's configuration file
     conf_parser = configparser.ConfigParser()
     conf_parser.add_section("Global")
     conf_parser.set("Global", "DAISHO_HOME", DAISHO_HOME)
@@ -43,9 +43,9 @@ def generate_config():
     # Configure logging from here
     logging.basicConfig(filename=LOG_FILE, level=logging.INFO)
     logging.info("Generating configuration files.")
-    logging.info("#### Daisho starting up ####")
+    logging.info("#### Corty starting up ####")
     # Check if we are able to connect to MongoDB.
-    daisho_db.mongo_conn()
-    daisho_help.usage()
-    daisho_cli.shell()
-    logging.info("Started Daisho prompt.")
+    db_connector.mongo_conn()
+    help.usage()
+    cli.shell()
+    logging.info("Started Corty prompt.")

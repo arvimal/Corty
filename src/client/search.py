@@ -7,7 +7,7 @@ patterns and regular expressions.
 
 import logging
 
-from corty.server import daisho_db
+from server import daisho_db
 
 logger = logging.getLogger(__name__)
 

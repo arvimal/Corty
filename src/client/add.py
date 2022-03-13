@@ -5,21 +5,21 @@ This module deals with adding notes and tasks,
 as well as editing them later.
 """
 
+
 import logging
 import os
 import pprint
 
-from corty.db import db_connector
+from db import db_connector
 from prompt_toolkit import prompt
 from prompt_toolkit.completion import WordCompleter
 from prompt_toolkit.history import FileHistory
 
-from server import daisho_db
 
 logger = logging.getLogger(__name__)
 HOME = os.getenv("HOME")
-DAISHO_HOME = HOME + "/.config/daisho/"
-ADD_HISTORY = DAISHO_HOME + "add_cmd.txt"
+CORTY_HOME = f'{HOME}/.config/corty/'
+ADD_HISTORY = f'{CORTY_HOME}add_cmd.txt'
 
 
 def add_prompt(job_type: str = None):
@@ -29,8 +29,8 @@ def add_prompt(job_type: str = None):
         * note
 
     Example:
-        ->> add task # To add a task to Daisho.
-        ->> add note # To add a note to Daisho.
+        ->> add task # To add a task to Corty.
+        ->> add note # To add a note to Corty.
     """
     if job_type == "task":
         task_fields = {"Subject": "", "Date": "", "Tags": [], "Priority": ""}
@@ -40,7 +40,7 @@ def add_prompt(job_type: str = None):
                 "{:>10} : ".format(key), history=FileHistory(ADD_HISTORY)
             )
         print()
-        daisho_db.add_task(task_fields)
+        corty_db.add_task(task_fields)
 
     elif job_type == "note":
         note_fields = {
@@ -56,7 +56,7 @@ def add_prompt(job_type: str = None):
                 "{:>10} : ".format(key), history=FileHistory(ADD_HISTORY)
             )
         print()
-        daisho_db.add_note(note_fields)
+        corty_db.add_note(note_fields)
 
 
 def add_task(task_dict):
