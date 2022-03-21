@@ -1,3 +1,4 @@
+import pytest
 from corty import __version__
 
 

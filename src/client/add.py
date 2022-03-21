@@ -32,17 +32,8 @@ def add_prompt(job_type: str = None):
         ->> add task # To add a task to Corty.
         ->> add note # To add a note to Corty.
     """
-    if job_type == "task":
-        task_fields = {"Subject": "", "Date": "", "Tags": [], "Priority": ""}
-        print(" - Creating a task.\n")
-        for key in task_fields:
-            task_fields[key] = prompt(
-                "{:>10} : ".format(key), history=FileHistory(ADD_HISTORY)
-            )
-        print()
-        corty_db.add_task(task_fields)
-
-    elif job_type == "note":
+    if job_type == "note":
+        print(" - Creating a note.\n")
         note_fields = {
             "Subject": "",
             "Date": "",
@@ -50,13 +41,21 @@ def add_prompt(job_type: str = None):
             "Priority": "",
             "Note": "",
         }
-        print(" - Creating a note.\n")
         for key in note_fields:
             note_fields[key] = prompt(
                 "{:>10} : ".format(key), history=FileHistory(ADD_HISTORY)
             )
         print()
         corty_db.add_note(note_fields)
+    elif job_type == "task":
+        print(" - Creating a task.\n")
+        task_fields = {"Subject": "", "Date": "", "Tags": [], "Priority": ""}
+        for key in task_fields:
+            task_fields[key] = prompt(
+                "{:>10} : ".format(key), history=FileHistory(ADD_HISTORY)
+            )
+        print()
+        corty_db.add_task(task_fields)
 
 
 def add_task(task_dict):

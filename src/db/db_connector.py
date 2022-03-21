@@ -26,7 +26,7 @@ def mongo_conn():
 
     except pymongo.errors.ConnectionFailure as err:
         print("\nFailed to connect to MongoDB\n")
-        print("- {}".format(err))
+        print(f"- {err}")
         print("")
         print(" * Daisho requires an active MongoDB instance on localhost")
         print(" * Check if `mongod` service is running")

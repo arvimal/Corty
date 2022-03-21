@@ -8,4 +8,4 @@ class Query(graphene.ObjectType):
 
     @staticmethod
     def resolve_query(parent, info, name):
-        return "Hello {}".format(name)
+        return f"Hello {name}"
