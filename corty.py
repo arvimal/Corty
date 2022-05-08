@@ -6,17 +6,9 @@ import os
 import pathlib
 import sys
 
-# Workaround to set the `src` folder in PYTHONPATH
-# to import `client` and subsequent functions
-# Required, in pythonv3
-cur_dir = os.path.dirname(os.path.realpath(__file__))
-par_dir = os.path.dirname(cur_dir)
-print(par_dir)
-sys.path.append(par_dir)
-
 from src.client import cli
 from src.db import db_connector
-from src.helpers import config, logger
+from src.helpers.config import generate_config
 
 if sys.version[0] != "3":
     print("\Requires Python v3")
@@ -36,16 +28,15 @@ class main(object):
 
     def __init__(self):
         # Check existence of CONFIG
-        if all([pathlib.Path(CONFIG).exists()]):
+        if all([pathlib.Path(CONFIG).exists(), pathlib.Path(LOG_FILE).exists]):
+            generate_config()
+        else:
             corty_logger.info(f"{pathlib.Path(CONFIG)} exists, Welcome to Corty")
             print("\n\t- Welcome to Corty -\n")
             # Check if we are able to connect to MongoDB.
             db_connector.mongo_conn()
             cli.shell()
             logger.info("Started Corty prompt.")
-
-        else:
-            config.generate_config()
 
 
 if __name__ == "__main__":

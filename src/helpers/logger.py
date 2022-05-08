@@ -4,8 +4,8 @@ import logging
 import os
 
 HOME = os.getenv("HOME")
-DAISHO_HOME = f'{HOME}/.config/corty/'
-LOG_FILE = f'{DAISHO_HOME}corty.log'
+DAISHO_HOME = f"{HOME}/.config/corty/"
+LOG_FILE = f"{DAISHO_HOME}corty.log"
 
 
 class Corty_Logger:

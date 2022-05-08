@@ -10,7 +10,7 @@ import logging
 import os
 import pprint
 
-from db import db_connector
+from src.db import db_connector
 from prompt_toolkit import prompt
 from prompt_toolkit.completion import WordCompleter
 from prompt_toolkit.history import FileHistory
@@ -18,8 +18,8 @@ from prompt_toolkit.history import FileHistory
 
 logger = logging.getLogger(__name__)
 HOME = os.getenv("HOME")
-CORTY_HOME = f'{HOME}/.config/corty/'
-ADD_HISTORY = f'{CORTY_HOME}add_cmd.txt'
+CORTY_HOME = f"{HOME}/.config/corty/"
+ADD_HISTORY = f"{CORTY_HOME}add_cmd.txt"
 
 
 def add_prompt(job_type: str = None):

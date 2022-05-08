@@ -17,7 +17,7 @@ This also takes care on opening tasks which has active sub-tasks,
 as well as notes in the pre-configured editor of your choice.
 """
 
-from db import db_connector
+from src.db import db_connector
 
 
 def list_tasks(val: str = "all"):
