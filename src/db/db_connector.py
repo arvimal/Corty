@@ -3,7 +3,8 @@
 import logging
 import sys
 
-import pymongo
+from pymongo import MongoClient
+from pymongo.errors import ConnectionFailure
 
 HOST = "localhost"
 PORT = "27017"
@@ -16,15 +17,13 @@ def mongo_conn():
     Connect to the local MongoDB
     Create the local db `corty`, if it doesn't exist
     """
+    corty_db = MongoClient()
     try:
-        print("Connecting to MongoDB...")
-        connect = pymongo.MongoClient(f'{HOST}:{PORT}')
-        # Connect to the `corty` db (will create if non-existing)
-        corty_db = connect.corty
-        if connect.database_names():
-            pass
+        print(f"Connecting to MongoDB at {HOST}:{PORT}")
+        res = corty_db.admin.command("ismaster")
+        print(f"{res}")
 
-    except pymongo.errors.ConnectionFailure as err:
+    except ConnectionFailure as err:
         print("\nFailed to connect to MongoDB\n")
         print(f"- {err}")
         print("")
