@@ -9,12 +9,12 @@ as well as editing them later.
 import logging
 import os
 import pprint
+from typing import Optional
 
-from src.db import db_connector
 from prompt_toolkit import prompt
 from prompt_toolkit.completion import WordCompleter
 from prompt_toolkit.history import FileHistory
-
+from src.db import db_connector
 
 logger = logging.getLogger(__name__)
 HOME = os.getenv("HOME")
@@ -46,7 +46,7 @@ def add_prompt(job_type: str = None):
                 "{:>10} : ".format(key), history=FileHistory(ADD_HISTORY)
             )
         print()
-        corty_db.add_note(note_fields)
+        db_connector.add_note(note_fields)
     elif job_type == "task":
         print(" - Creating a task.\n")
         task_fields = {"Subject": "", "Date": "", "Tags": [], "Priority": ""}
@@ -55,7 +55,7 @@ def add_prompt(job_type: str = None):
                 "{:>10} : ".format(key), history=FileHistory(ADD_HISTORY)
             )
         print()
-        corty_db.add_task(task_fields)
+        db_connector.add_task(task_fields)
 
 
 def add_task(task_dict):
@@ -66,7 +66,7 @@ def add_task(task_dict):
     print("Adding your task to the database!")
 
 
-def add_note(note_dict):
+def add_note(note_dict: dict):
     """
     Add note entries in the db
     """
@@ -76,5 +76,5 @@ def add_note(note_dict):
     print("Adding your note to the database!")
 
 
-def edit_prompt(job_type=None, element_number=None):
+def edit_prompt(job_type: str | Optional[None], element_number: int | Optional[None]):
     pass
