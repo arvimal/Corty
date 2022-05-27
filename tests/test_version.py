@@ -1,5 +1,5 @@
 import pytest
-from corty import __version__
+from corty import __version__  # type: ignore
 
 
 def test_version():
