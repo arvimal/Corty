@@ -11,7 +11,7 @@ from src.db import db_connector
 from src.helpers.config import generate_config
 
 if sys.version[0] != "3":
-    print("\Requires Python v3")
+    print("\nRequires Python v3")
     print("Exiting!\n")
     sys.exit(1)
 

@@ -39,7 +39,7 @@ def shell():
             completer=keyword_completer,
         )
         # Split the input to a list
-        values = list(corty_prompt.split())
+        values = list(corty_prompt.split())  # type: ignore
         key_word = values[0].lower()
 
         if key_word in cmd_list:
