@@ -14,10 +14,6 @@ par_dir = os.path.dirname(cur_dir)
 print(par_dir)
 sys.path.append(par_dir)
 
-from client import cli
-from helpers import config, help, logger
-from server import db
-
 if sys.version[0] != "3":
     print("\Requires Python v3")
     print("Exiting!\n")

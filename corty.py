@@ -14,7 +14,9 @@ par_dir = os.path.dirname(cur_dir)
 print(par_dir)
 sys.path.append(par_dir)
 
-from src.client import cli
+__version__ = "0.1.0"
+
+from client import cli
 from src.db import db_connector
 from src.helpers import config, logger
 
